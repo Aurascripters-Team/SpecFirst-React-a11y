@@ -1,0 +1,325 @@
+{
+  "schemaVersion": "1.1.0",
+  "component": {
+    "name": "Picker",
+    "path": "tests/fixtures/ArrowComponentWithAria.tsx",
+    "framework": "react",
+    "language": "typescript",
+    "declarationKind": "arrow-function",
+    "exportType": "named"
+  },
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "required": true,
+      "kind": "label"
+    },
+    {
+      "name": "options",
+      "type": "Option[]",
+      "required": true,
+      "kind": "collection"
+    },
+    {
+      "name": "value",
+      "type": "string | undefined",
+      "required": false,
+      "kind": "value"
+    },
+    {
+      "name": "onChange",
+      "type": "(value: string) => void",
+      "required": true,
+      "kind": "callback"
+    }
+  ],
+  "state": [
+    {
+      "name": "open",
+      "setter": "setOpen",
+      "initialValue": "false",
+      "likelyPurpose": "open-close"
+    },
+    {
+      "name": "activeIndex",
+      "setter": "setActiveIndex",
+      "initialValue": "0",
+      "likelyPurpose": "active-index"
+    }
+  ],
+  "jsxElements": [
+    {
+      "id": "jsx-1",
+      "tag": "div",
+      "isNativeElement": true,
+      "childrenIds": [
+        "jsx-2",
+        "jsx-3"
+      ],
+      "sourceLocation": {
+        "startLine": 20,
+        "endLine": 52
+      },
+      "snippet": "<div>",
+      "attributes": [],
+      "eventHandlers": [],
+      "ariaAttributes": [],
+      "insideMap": false,
+      "insideConditional": false,
+      "textHints": [],
+      "classNameHints": [],
+      "literalHints": []
+    },
+    {
+      "id": "jsx-2",
+      "tag": "button",
+      "isNativeElement": true,
+      "parentId": "jsx-1",
+      "childrenIds": [],
+      "sourceLocation": {
+        "startLine": 21,
+        "endLine": 36
+      },
+      "snippet": "<button role=\"combobox\" aria-label={label} aria-expanded={open} aria-controls=\"picker-listbox\" aria-activedescendant={`picker-option-${activeIndex}`} onClick...",
+      "attributes": [
+        "role",
+        "aria-label",
+        "aria-expanded",
+        "aria-controls",
+        "aria-activedescendant",
+        "onClick",
+        "onKeyDown"
+      ],
+      "eventHandlers": [
+        "onClick",
+        "onKeyDown"
+      ],
+      "ariaAttributes": [
+        "aria-label",
+        "aria-expanded",
+        "aria-controls",
+        "aria-activedescendant"
+      ],
+      "roleValue": "combobox",
+      "insideMap": false,
+      "insideConditional": false,
+      "textHints": [
+        "Choose fruit"
+      ],
+      "classNameHints": [],
+      "literalHints": [
+        {
+          "value": "Choose fruit",
+          "source": "fallback-text"
+        },
+        {
+          "value": "combobox",
+          "source": "attribute"
+        },
+        {
+          "value": "picker-listbox",
+          "source": "attribute"
+        },
+        {
+          "value": "ArrowDown",
+          "source": "attribute"
+        }
+      ]
+    },
+    {
+      "id": "jsx-3",
+      "tag": "ul",
+      "isNativeElement": true,
+      "parentId": "jsx-1",
+      "childrenIds": [
+        "jsx-4"
+      ],
+      "sourceLocation": {
+        "startLine": 38,
+        "endLine": 50
+      },
+      "snippet": "<ul id=\"picker-listbox\" role=\"listbox\">",
+      "attributes": [
+        "id",
+        "role"
+      ],
+      "eventHandlers": [],
+      "ariaAttributes": [],
+      "roleValue": "listbox",
+      "insideMap": false,
+      "insideConditional": true,
+      "textHints": [],
+      "classNameHints": [],
+      "literalHints": [
+        {
+          "value": "picker-listbox",
+          "source": "attribute"
+        },
+        {
+          "value": "listbox",
+          "source": "attribute"
+        }
+      ]
+    },
+    {
+      "id": "jsx-4",
+      "tag": "li",
+      "isNativeElement": true,
+      "parentId": "jsx-3",
+      "childrenIds": [],
+      "sourceLocation": {
+        "startLine": 40,
+        "endLine": 48
+      },
+      "snippet": "<li id={`picker-option-${option.value}`} key={option.value} role=\"option\" aria-selected={option.value === value} onClick={() => onChange(option.value)} >",
+      "attributes": [
+        "id",
+        "key",
+        "role",
+        "aria-selected",
+        "onClick"
+      ],
+      "eventHandlers": [
+        "onClick"
+      ],
+      "ariaAttributes": [
+        "aria-selected"
+      ],
+      "roleValue": "option",
+      "insideMap": true,
+      "insideConditional": true,
+      "textHints": [],
+      "classNameHints": [],
+      "literalHints": [
+        {
+          "value": "option",
+          "source": "attribute"
+        }
+      ]
+    }
+  ],
+  "interactionModel": {
+    "candidateTriggerElementId": "jsx-2",
+    "candidatePopupElementId": "jsx-3",
+    "candidateOptionElementIds": [
+      "jsx-4"
+    ],
+    "controlState": "open"
+  },
+  "renderPatterns": {
+    "conditionalPopup": true,
+    "popupControlledByState": "open",
+    "optionsRenderedFromMap": true,
+    "triggerControlsPopup": true,
+    "selectableOptions": true
+  },
+  "accessibilitySignals": {
+    "roles": [
+      "combobox",
+      "listbox",
+      "option"
+    ],
+    "ariaAttributes": [
+      "aria-activedescendant",
+      "aria-controls",
+      "aria-expanded",
+      "aria-label",
+      "aria-selected"
+    ],
+    "accessibleNameCandidates": [
+      {
+        "source": "aria-label",
+        "elementId": "jsx-2",
+        "confidence": "high",
+        "attribute": "aria-label",
+        "text": "combobox"
+      },
+      {
+        "source": "button-text-fallback",
+        "elementId": "jsx-2",
+        "confidence": "medium",
+        "text": "Choose fruit"
+      }
+    ],
+    "hasAccessibleNameCandidate": true,
+    "hasKeyboardHandler": true,
+    "hasComboboxRole": true,
+    "hasListboxRole": true,
+    "hasOptionRole": true,
+    "hasAriaExpanded": true,
+    "hasAriaControls": true,
+    "hasAriaSelected": true,
+    "hasAriaActiveDescendant": true
+  },
+  "nativeElementSignals": {
+    "hasNativeSelect": false,
+    "couldUseNativeSelect": true
+  },
+  "eventStateLinks": [
+    {
+      "elementId": "jsx-2",
+      "event": "onClick",
+      "effects": [
+        {
+          "type": "state-set",
+          "callsSetter": "setOpen",
+          "state": "open",
+          "value": "!open",
+          "likelyAction": "toggle"
+        }
+      ],
+      "callsSetter": "setOpen",
+      "state": "open",
+      "likelyAction": "toggle"
+    },
+    {
+      "elementId": "jsx-2",
+      "event": "onKeyDown",
+      "effects": [
+        {
+          "type": "state-set",
+          "callsSetter": "setActiveIndex",
+          "state": "activeIndex",
+          "value": "0",
+          "likelyAction": "set"
+        },
+        {
+          "type": "state-set",
+          "callsSetter": "setOpen",
+          "state": "open",
+          "value": "true",
+          "likelyAction": "open-popup"
+        }
+      ],
+      "callsSetter": "setActiveIndex",
+      "state": "activeIndex",
+      "likelyAction": "set"
+    },
+    {
+      "elementId": "jsx-4",
+      "event": "onClick",
+      "effects": [
+        {
+          "type": "callback-call",
+          "callback": "onChange",
+          "argument": "option.value",
+          "likelyAction": "select-value"
+        }
+      ],
+      "likelyAction": "select-value"
+    }
+  ],
+  "riskFlags": [
+    {
+      "id": "custom-select-native-alternative",
+      "severity": "low",
+      "message": "Component resembles a simple single-select control. A native <select> may be preferable if custom styling or behavior is not required."
+    }
+  ],
+  "limitations": [
+    "Imported custom components are not resolved in the MVP.",
+    "Screen reader behavior is not inferred from static analysis.",
+    "Accessible name candidates are detected, not fully computed."
+  ]
+}

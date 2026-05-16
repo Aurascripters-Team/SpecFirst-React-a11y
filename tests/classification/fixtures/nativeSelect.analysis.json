@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.1.0",
+  "component": { "name": "NativeFruitSelect", "path": "fixtures/NativeFruitSelect.tsx", "framework": "react", "language": "typescript", "declarationKind": "function", "exportType": "named" },
+  "props": [
+    { "name": "options", "kind": "collection" },
+    { "name": "value", "kind": "value" },
+    { "name": "onChange", "kind": "callback" }
+  ],
+  "state": [],
+  "jsxElements": [
+    { "id": "jsx-1", "tag": "select", "isNativeElement": true, "childrenIds": ["jsx-2"], "attributes": ["value", "onChange"], "eventHandlers": ["onChange"], "ariaAttributes": [] },
+    { "id": "jsx-2", "tag": "option", "isNativeElement": true, "parentId": "jsx-1", "childrenIds": [], "attributes": ["value"], "eventHandlers": [], "ariaAttributes": [], "insideMap": true }
+  ],
+  "interactionModel": { "candidateOptionElementIds": [] },
+  "renderPatterns": { "conditionalPopup": false, "optionsRenderedFromMap": true, "triggerControlsPopup": false, "selectableOptions": true },
+  "accessibilitySignals": { "roles": [], "ariaAttributes": [], "accessibleNameCandidates": [], "hasAccessibleNameCandidate": true, "hasKeyboardHandler": false, "hasComboboxRole": false, "hasListboxRole": false, "hasOptionRole": false, "hasAriaExpanded": false, "hasAriaControls": false, "hasAriaSelected": false, "hasAriaActiveDescendant": false },
+  "nativeElementSignals": { "hasNativeSelect": true, "couldUseNativeSelect": false },
+  "eventStateLinks": [],
+  "riskFlags": [],
+  "limitations": []
+}

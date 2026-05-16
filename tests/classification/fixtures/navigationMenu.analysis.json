@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.1.0",
+  "component": { "name": "NavigationMenu", "path": "fixtures/NavigationMenu.tsx", "framework": "react", "language": "typescript", "declarationKind": "function", "exportType": "named" },
+  "props": [{ "name": "items", "kind": "collection" }],
+  "state": [{ "name": "open", "setter": "setOpen", "likelyPurpose": "open-close" }],
+  "jsxElements": [
+    { "id": "jsx-1", "tag": "button", "isNativeElement": true, "childrenIds": [], "attributes": ["onClick"], "eventHandlers": ["onClick"], "ariaAttributes": [] },
+    { "id": "jsx-2", "tag": "ul", "isNativeElement": true, "childrenIds": ["jsx-3"], "attributes": [], "eventHandlers": [], "ariaAttributes": [], "insideConditional": true },
+    { "id": "jsx-3", "tag": "li", "isNativeElement": true, "parentId": "jsx-2", "childrenIds": ["jsx-4"], "attributes": [], "eventHandlers": [], "ariaAttributes": [], "insideMap": true, "insideConditional": true },
+    { "id": "jsx-4", "tag": "a", "isNativeElement": true, "parentId": "jsx-3", "childrenIds": [], "attributes": ["href"], "eventHandlers": [], "ariaAttributes": [], "insideMap": true, "insideConditional": true }
+  ],
+  "interactionModel": { "candidateTriggerElementId": "jsx-1", "candidatePopupElementId": "jsx-2", "candidateOptionElementIds": ["jsx-3"], "controlState": "open" },
+  "renderPatterns": { "conditionalPopup": true, "popupControlledByState": "open", "optionsRenderedFromMap": true, "triggerControlsPopup": true, "selectableOptions": false },
+  "accessibilitySignals": { "roles": [], "ariaAttributes": [], "accessibleNameCandidates": [], "hasAccessibleNameCandidate": true, "hasKeyboardHandler": false, "hasComboboxRole": false, "hasListboxRole": false, "hasOptionRole": false, "hasAriaExpanded": false, "hasAriaControls": false, "hasAriaSelected": false, "hasAriaActiveDescendant": false },
+  "nativeElementSignals": { "hasNativeSelect": false, "couldUseNativeSelect": false },
+  "eventStateLinks": [{ "elementId": "jsx-1", "event": "onClick", "effects": [{ "type": "state-set", "callsSetter": "setOpen", "state": "open", "value": "!open", "likelyAction": "toggle" }] }],
+  "riskFlags": [],
+  "limitations": []
+}

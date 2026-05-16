@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "1.1.0",
+  "component": { "name": "EdgeCasePicker", "path": "fixtures/EdgeCasePicker.tsx", "framework": "react", "language": "typescript", "declarationKind": "function", "exportType": "named" },
+  "props": [
+    { "name": "label", "kind": "label" },
+    { "name": "options", "kind": "collection" },
+    { "name": "value", "kind": "value" },
+    { "name": "onChange", "kind": "callback" },
+    { "name": "onDelete", "kind": "callback" }
+  ],
+  "state": [
+    { "name": "open", "setter": "setOpen", "initialValue": "false", "likelyPurpose": "open-close" },
+    { "name": "query", "setter": "setQuery", "initialValue": "\"\"", "likelyPurpose": "unknown" },
+    { "name": "selectedValues", "setter": "setSelectedValues", "initialValue": "value ? [value] : []", "likelyPurpose": "selection" }
+  ],
+  "jsxElements": [
+    { "id": "jsx-1", "tag": "button", "isNativeElement": true, "childrenIds": [], "attributes": ["onClick", "aria-expanded"], "eventHandlers": ["onClick"], "ariaAttributes": ["aria-expanded"] },
+    { "id": "jsx-2", "tag": "div", "isNativeElement": true, "childrenIds": ["jsx-3", "jsx-4"], "attributes": [], "eventHandlers": [], "ariaAttributes": [], "insideConditional": true },
+    { "id": "jsx-3", "tag": "input", "isNativeElement": true, "parentId": "jsx-2", "childrenIds": [], "attributes": ["aria-label", "value", "onChange"], "eventHandlers": ["onChange"], "ariaAttributes": ["aria-label"], "insideConditional": true },
+    { "id": "jsx-4", "tag": "ul", "isNativeElement": true, "parentId": "jsx-2", "childrenIds": ["jsx-5"], "attributes": [], "eventHandlers": [], "ariaAttributes": [], "insideConditional": true },
+    { "id": "jsx-5", "tag": "li", "isNativeElement": true, "parentId": "jsx-4", "childrenIds": ["jsx-6", "jsx-7", "jsx-8"], "attributes": [], "eventHandlers": [], "ariaAttributes": [], "insideConditional": true, "insideMap": true },
+    { "id": "jsx-6", "tag": "a", "isNativeElement": true, "parentId": "jsx-5", "childrenIds": [], "attributes": ["href"], "eventHandlers": [], "ariaAttributes": [], "insideConditional": true, "insideMap": true },
+    { "id": "jsx-7", "tag": "input", "isNativeElement": true, "parentId": "jsx-5", "childrenIds": [], "attributes": ["type", "checked", "onChange"], "eventHandlers": ["onChange"], "ariaAttributes": [], "insideConditional": true, "insideMap": true, "literalHints": [{ "value": "checkbox", "source": "attribute" }], "snippet": "<input type=\"checkbox\" checked={selectedValues.includes(option.value)} onChange={...} />" },
+    { "id": "jsx-8", "tag": "button", "isNativeElement": true, "parentId": "jsx-5", "childrenIds": [], "attributes": ["type", "onClick"], "eventHandlers": ["onClick"], "ariaAttributes": [], "insideConditional": true, "insideMap": true, "textHints": ["Delete"] }
+  ],
+  "interactionModel": { "candidateTriggerElementId": "jsx-1", "candidatePopupElementId": "jsx-2", "candidateOptionElementIds": ["jsx-7", "jsx-8"], "controlState": "open" },
+  "renderPatterns": { "conditionalPopup": true, "popupControlledByState": "open", "optionsRenderedFromMap": true, "triggerControlsPopup": true, "selectableOptions": true },
+  "accessibilitySignals": { "roles": [], "ariaAttributes": ["aria-expanded", "aria-label"], "accessibleNameCandidates": [], "hasAccessibleNameCandidate": true, "hasKeyboardHandler": false, "hasComboboxRole": false, "hasListboxRole": false, "hasOptionRole": false, "hasAriaExpanded": true, "hasAriaControls": false, "hasAriaSelected": false, "hasAriaActiveDescendant": false },
+  "nativeElementSignals": { "hasNativeSelect": false, "couldUseNativeSelect": false },
+  "eventStateLinks": [
+    { "elementId": "jsx-1", "event": "onClick", "effects": [{ "type": "state-set", "callsSetter": "setOpen", "state": "open", "value": "!open", "likelyAction": "toggle" }] },
+    { "elementId": "jsx-7", "event": "onChange", "effects": [{ "type": "state-set", "callsSetter": "setSelectedValues", "state": "selectedValues", "value": "(current) => checked ? [...current, option.value] : current.filter((item) => item !== option.value)", "likelyAction": "set" }, { "type": "callback-call", "callback": "onChange", "argument": "option.value", "likelyAction": "select-value" }] },
+    { "elementId": "jsx-8", "event": "onClick", "effects": [{ "type": "callback-call", "callback": "onDelete", "argument": "option.value", "likelyAction": "unknown" }] }
+  ],
+  "riskFlags": [],
+  "limitations": []
+}

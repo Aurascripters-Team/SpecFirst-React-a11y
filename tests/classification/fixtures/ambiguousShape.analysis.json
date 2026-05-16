@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "1.1.0",
+  "component": { "name": "MaybePicker", "path": "fixtures/MaybePicker.tsx", "framework": "react", "language": "typescript", "declarationKind": "function", "exportType": "named" },
+  "props": [
+    { "name": "options", "kind": "collection" },
+    { "name": "value", "kind": "value" },
+    { "name": "onChange", "kind": "callback" }
+  ],
+  "state": [{ "name": "open", "setter": "setOpen", "likelyPurpose": "open-close" }],
+  "jsxElements": [{ "id": "jsx-1", "tag": "button", "isNativeElement": true, "childrenIds": [], "attributes": ["onClick"], "eventHandlers": ["onClick"], "ariaAttributes": [] }],
+  "interactionModel": { "candidateTriggerElementId": "jsx-1", "candidateOptionElementIds": [], "controlState": "open" },
+  "renderPatterns": { "conditionalPopup": false, "optionsRenderedFromMap": false, "triggerControlsPopup": true, "selectableOptions": false },
+  "accessibilitySignals": { "roles": [], "ariaAttributes": [], "accessibleNameCandidates": [], "hasAccessibleNameCandidate": true, "hasKeyboardHandler": false, "hasComboboxRole": false, "hasListboxRole": false, "hasOptionRole": false, "hasAriaExpanded": false, "hasAriaControls": false, "hasAriaSelected": false, "hasAriaActiveDescendant": false },
+  "nativeElementSignals": { "hasNativeSelect": false, "couldUseNativeSelect": false },
+  "eventStateLinks": [],
+  "riskFlags": [],
+  "limitations": []
+}
