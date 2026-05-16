@@ -7,9 +7,11 @@
     "specfirst:analyze": "tsx specfirst/cli/analyze.ts",
     "specfirst:classify": "tsx specfirst/cli/classify.ts",
     "specfirst:load-manifest": "tsx specfirst/cli/loadManifest.ts",
+    "specfirst:freeze-spec": "tsx specfirst/cli/freezeSpec.ts",
     "test:analysis": "tsx tests/analysis/runAnalysisFixtures.ts",
     "test:classification": "tsx tests/classification/runClassificationFixtures.ts",
     "test:manifest": "tsx tests/manifest/runManifestLoaderFixtures.ts",
+    "test:spec": "tsx tests/spec/runFreezeSpecFixtures.ts",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {

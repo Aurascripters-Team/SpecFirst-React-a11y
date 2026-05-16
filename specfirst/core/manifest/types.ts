@@ -23,9 +23,16 @@ export type RuleManifest = {
   requirements?: ManifestRequirement[];
   manualReviewRequired?: string[];
   bobPatchConstraints?: string[];
+  automation?: {
+    framework?: string;
+    axeIntegration?: string;
+    scopeSelector?: string;
+    strategies?: Record<string, string>;
+  };
   reportBoundary?: {
     forbidden?: string[];
     allowedLanguage?: string[];
+    rationale?: string;
   };
   applicability?: {
     requires?: string[];
@@ -35,7 +42,11 @@ export type RuleManifest = {
 
 export type ManifestRequirement = {
   id?: string;
+  category?: string;
+  description?: string;
+  layers?: Record<string, string[]>;
   maturity?: string;
+  testStrategy?: string;
   testable?: boolean;
   manualReview?: boolean;
 };
