@@ -1,0 +1,208 @@
+{
+  "schemaVersion": "1.0.0",
+  "component": {
+    "name": "SelectOnlyCombobox",
+    "path": "tests/fixtures/NamedFunctionCombobox.tsx",
+    "framework": "react",
+    "language": "typescript",
+    "declarationKind": "function",
+    "exportType": "named"
+  },
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "required": true,
+      "kind": "label"
+    },
+    {
+      "name": "options",
+      "type": "Option[]",
+      "required": true,
+      "kind": "collection"
+    },
+    {
+      "name": "value",
+      "type": "string | undefined",
+      "required": false,
+      "kind": "value"
+    },
+    {
+      "name": "onChange",
+      "type": "(value: string) => void",
+      "required": true,
+      "kind": "callback"
+    },
+    {
+      "name": "disabled",
+      "type": "boolean | undefined",
+      "required": false,
+      "kind": "boolean"
+    },
+    {
+      "name": "className",
+      "type": "string | undefined",
+      "required": false,
+      "kind": "label"
+    }
+  ],
+  "state": [
+    {
+      "name": "open",
+      "setter": "setOpen",
+      "initialValue": "false",
+      "likelyPurpose": "open-close"
+    }
+  ],
+  "jsxElements": [
+    {
+      "id": "jsx-1",
+      "tag": "div",
+      "isNativeElement": true,
+      "attributes": [
+        "className"
+      ],
+      "eventHandlers": [],
+      "ariaAttributes": [],
+      "insideMap": false,
+      "insideConditional": false,
+      "textHints": [
+        "Choose fruit",
+        "combo-list",
+        "combo-option"
+      ]
+    },
+    {
+      "id": "jsx-2",
+      "tag": "span",
+      "isNativeElement": true,
+      "attributes": [],
+      "eventHandlers": [],
+      "ariaAttributes": [],
+      "insideMap": false,
+      "insideConditional": false,
+      "textHints": []
+    },
+    {
+      "id": "jsx-3",
+      "tag": "button",
+      "isNativeElement": true,
+      "attributes": [
+        "disabled",
+        "onClick"
+      ],
+      "eventHandlers": [
+        "onClick"
+      ],
+      "ariaAttributes": [],
+      "insideMap": false,
+      "insideConditional": false,
+      "textHints": [
+        "Choose fruit"
+      ]
+    },
+    {
+      "id": "jsx-4",
+      "tag": "ul",
+      "isNativeElement": true,
+      "attributes": [
+        "className"
+      ],
+      "eventHandlers": [],
+      "ariaAttributes": [],
+      "insideMap": false,
+      "insideConditional": true,
+      "textHints": [
+        "combo-list",
+        "combo-option"
+      ]
+    },
+    {
+      "id": "jsx-5",
+      "tag": "li",
+      "isNativeElement": true,
+      "attributes": [
+        "key",
+        "className",
+        "onClick"
+      ],
+      "eventHandlers": [
+        "onClick"
+      ],
+      "ariaAttributes": [],
+      "insideMap": true,
+      "insideConditional": true,
+      "textHints": [
+        "combo-option"
+      ]
+    }
+  ],
+  "renderPatterns": {
+    "conditionalPopup": true,
+    "popupControlledByState": "open",
+    "optionsRenderedFromMap": true,
+    "triggerControlsPopup": true,
+    "selectableOptions": true
+  },
+  "accessibilitySignals": {
+    "roles": [],
+    "ariaAttributes": [],
+    "hasAccessibleNameCandidate": true,
+    "hasKeyboardHandler": false,
+    "hasComboboxRole": false,
+    "hasListboxRole": false,
+    "hasOptionRole": false,
+    "hasAriaExpanded": false,
+    "hasAriaControls": false,
+    "hasAriaSelected": false,
+    "hasAriaActiveDescendant": false
+  },
+  "eventStateLinks": [
+    {
+      "elementId": "jsx-3",
+      "event": "onClick",
+      "callsSetter": "setOpen",
+      "state": "open",
+      "likelyAction": "toggle"
+    },
+    {
+      "elementId": "jsx-5",
+      "event": "onClick",
+      "callsSetter": "setOpen",
+      "state": "open",
+      "likelyAction": "select"
+    }
+  ],
+  "riskFlags": [
+    {
+      "id": "click-without-keyboard",
+      "severity": "high",
+      "message": "Click behavior exists but no keyboard handler was detected."
+    },
+    {
+      "id": "missing-expanded-state",
+      "severity": "medium",
+      "message": "Conditional popup visibility exists but no aria-expanded attribute was detected."
+    },
+    {
+      "id": "missing-popup-association",
+      "severity": "medium",
+      "message": "A trigger appears to control a popup, but no aria-controls relationship was detected."
+    },
+    {
+      "id": "missing-option-semantics",
+      "severity": "medium",
+      "message": "Mapped selectable items were detected without role=\"option\" semantics."
+    },
+    {
+      "id": "missing-selected-state",
+      "severity": "medium",
+      "message": "Selectable options were detected without aria-selected state."
+    }
+  ],
+  "limitations": [
+    "Imported custom components are not resolved in the MVP.",
+    "Screen reader behavior is not inferred from static analysis.",
+    "Accessible name candidates are detected, not fully computed."
+  ]
+}
