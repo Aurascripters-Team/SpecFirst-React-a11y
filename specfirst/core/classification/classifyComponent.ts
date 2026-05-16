@@ -23,13 +23,14 @@ export function classifyComponent(analysis: ComponentAnalysis): ClassificationAr
   const nativeSelectPresent = hasNativeSelectElement(analysis);
   const mixedInteractivePopup = hasMixedInteractivePopup(blockers);
   const customComponentAmbiguity = hasUnresolvedCustomComponentAmbiguity(analysis);
-  const confidence = nativeSelectPresent
+  const rawConfidence = nativeSelectPresent
     ? 0.95
     : mixedInteractivePopup
       ? 0.95
       : customComponentAmbiguity
         ? Math.min(score.normalized, 0.84)
         : score.normalized;
+  const confidence = Math.min(rawConfidence, 0.97);
   const confidenceLevel = getConfidenceLevel(confidence);
   const pattern = selectPattern(analysis, nativeSelectPresent, blockers, score.normalized);
   const status = selectStatus(analysis, pattern, nativeSelectPresent, blockers.length > 0, score.normalized);
