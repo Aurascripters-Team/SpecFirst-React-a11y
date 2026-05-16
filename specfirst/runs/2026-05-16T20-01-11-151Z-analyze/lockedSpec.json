@@ -1,0 +1,620 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "locked",
+  "sourceArtifacts": {
+    "componentAnalysisPath": "specfirst/runs/2026-05-16T20-01-11-151Z-analyze/componentAnalysis.json",
+    "classificationPath": "specfirst/runs/2026-05-16T20-01-11-151Z-analyze/classification.json",
+    "manifestLoadResultPath": "specfirst/runs/2026-05-16T20-01-11-151Z-analyze/manifestLoadResult.json",
+    "manifestUsedPath": "specfirst/runs/2026-05-16T20-01-11-151Z-analyze/manifestUsed.json",
+    "hashes": {
+      "componentAnalysis": "sha256:17be1dcb544b8644e3e5f91449dc4e23313bcf284e91c0daca4f17bdcc588b77",
+      "classification": "sha256:531a93405cae097eff866b424cc3f780b5f6c157ed7826cd4b912cad1f7faa2d",
+      "manifestLoadResult": "sha256:4381fae9b0032461a512e1454e00befcd5364d03418aec9eaed11361b385cfec",
+      "manifestUsed": "sha256:aacd31fc4d513089f0fdc45aefe5fde83aae5019ea418024818437459ec7a7f0"
+    }
+  },
+  "generationPolicy": {
+    "mode": "deterministic",
+    "bobUsed": false,
+    "testsGenerated": false,
+    "componentModified": false,
+    "uiRendered": false,
+    "complianceClaimMade": false
+  },
+  "component": {
+    "name": "Picker",
+    "path": "tests/fixtures/ArrowComponentWithAria.tsx",
+    "framework": "react",
+    "language": "typescript",
+    "declarationKind": "arrow-function",
+    "exportType": "named"
+  },
+  "classification": {
+    "pattern": "react-select-only-combobox",
+    "status": "supported",
+    "confidence": 0.97,
+    "confidenceLevel": "high",
+    "decisionReason": "Classified as react-select-only-combobox because the component has a controlled value, options collection, selection callback, trigger-controlled popup, mapped selectable options, and no text input."
+  },
+  "manifest": {
+    "id": "react-select-only-combobox",
+    "version": "1.0.0",
+    "sourceModel": "7-layer",
+    "path": "specfirst/rules/react-select-only-combobox.v1.json"
+  },
+  "spec": {
+    "id": "Picker-react-select-only-combobox-2026-05-16T20-01-20-375Z",
+    "createdAt": "2026-05-16T20:01:20.375Z",
+    "createdBeforePatch": true
+  },
+  "componentBindings": {
+    "triggerElementId": "jsx-2",
+    "popupElementId": "jsx-3",
+    "optionElementIds": [
+      "jsx-4"
+    ],
+    "controlState": "open",
+    "accessibleNameBinding": {
+      "preferredNameSourceForSpec": "aria-label",
+      "confidence": "high",
+      "text": "combobox",
+      "elementId": "jsx-2",
+      "fallbackText": "Choose fruit"
+    },
+    "existingNameSignals": [
+      {
+        "source": "aria-label",
+        "elementId": "jsx-2",
+        "confidence": "high",
+        "attribute": "aria-label",
+        "text": "combobox"
+      },
+      {
+        "source": "button-text-fallback",
+        "elementId": "jsx-2",
+        "confidence": "medium",
+        "text": "Choose fruit"
+      }
+    ],
+    "elements": {
+      "trigger": {
+        "elementId": "jsx-2",
+        "tag": "button",
+        "snippet": "<button role=\"combobox\" aria-label={label} aria-expanded={open} aria-controls=\"picker-listbox\" aria-activedescendant={`picker-option-${activeIndex}`} onClick...",
+        "sourceLocation": {
+          "startLine": 21,
+          "endLine": 36
+        }
+      },
+      "popup": {
+        "elementId": "jsx-3",
+        "tag": "ul",
+        "snippet": "<ul id=\"picker-listbox\" role=\"listbox\">",
+        "sourceLocation": {
+          "startLine": 38,
+          "endLine": 50
+        }
+      },
+      "options": [
+        {
+          "elementId": "jsx-4",
+          "tag": "li",
+          "snippet": "<li id={`picker-option-${option.value}`} key={option.value} role=\"option\" aria-selected={option.value === value} onClick={() => onChange(option.value)} >",
+          "sourceLocation": {
+            "startLine": 40,
+            "endLine": 48
+          }
+        }
+      ]
+    }
+  },
+  "componentScope": {
+    "strategy": "demo-wrapper",
+    "selector": "[data-specfirst-root=\"Picker\"]"
+  },
+  "testHarnessHints": {
+    "needsLabelProp": true,
+    "needsOptionsCollection": true,
+    "needsOnChangeSpy": true,
+    "recommendedOptions": [
+      {
+        "label": "Apple",
+        "value": "apple"
+      },
+      {
+        "label": "Banana",
+        "value": "banana"
+      }
+    ]
+  },
+  "checks": [
+    {
+      "id": "accessible-name",
+      "category": "naming",
+      "sourceRequirementId": "accessible-name",
+      "description": "The combobox trigger exposes a non-empty accessible name that persists regardless of the current selection state.",
+      "testable": true,
+      "maturity": "automated",
+      "testStrategy": "role-name-query",
+      "layers": {
+        "wcagOutcomes": [
+          "4.1.2"
+        ],
+        "ariaPattern": [
+          "APG-combobox-select-only"
+        ],
+        "ariaValidity": [
+          "required-attributes-on-trigger"
+        ],
+        "accessibleName": [
+          "aria-labelledby",
+          "aria-label",
+          "visible-label-association"
+        ],
+        "automation": [
+          "role-name-query"
+        ]
+      },
+      "params": {
+        "triggerElementId": "jsx-2",
+        "popupElementId": "jsx-3",
+        "optionElementIds": [
+          "jsx-4"
+        ],
+        "controlState": "open",
+        "componentScopeSelector": "[data-specfirst-root=\"Picker\"]",
+        "role": "combobox",
+        "accessibleNameBinding": {
+          "preferredNameSourceForSpec": "aria-label",
+          "confidence": "high",
+          "text": "combobox",
+          "elementId": "jsx-2",
+          "fallbackText": "Choose fruit"
+        }
+      }
+    },
+    {
+      "id": "combobox-role",
+      "category": "role",
+      "sourceRequirementId": "combobox-role",
+      "description": "The primary trigger element exposes role=combobox.",
+      "testable": true,
+      "maturity": "automated",
+      "testStrategy": "role-query",
+      "layers": {
+        "wcagOutcomes": [
+          "4.1.2"
+        ],
+        "ariaPattern": [
+          "APG-combobox-select-only"
+        ],
+        "ariaValidity": [
+          "combobox-host-element"
+        ],
+        "automation": [
+          "role-query"
+        ]
+      },
+      "params": {
+        "triggerElementId": "jsx-2",
+        "popupElementId": "jsx-3",
+        "optionElementIds": [
+          "jsx-4"
+        ],
+        "controlState": "open",
+        "componentScopeSelector": "[data-specfirst-root=\"Picker\"]",
+        "expectedRole": "combobox",
+        "allowedHostElements": [
+          "button"
+        ]
+      }
+    },
+    {
+      "id": "expanded-state",
+      "category": "state",
+      "sourceRequirementId": "expanded-state",
+      "description": "The trigger element exposes aria-expanded based on the component popup control state.",
+      "testable": true,
+      "maturity": "automated",
+      "testStrategy": "attribute-toggle",
+      "layers": {
+        "wcagOutcomes": [
+          "4.1.2"
+        ],
+        "ariaPattern": [
+          "APG-combobox-select-only"
+        ],
+        "ariaValidity": [
+          "required-attributes-on-trigger"
+        ],
+        "automation": [
+          "attribute-toggle"
+        ]
+      },
+      "params": {
+        "triggerElementId": "jsx-2",
+        "popupElementId": "jsx-3",
+        "optionElementIds": [
+          "jsx-4"
+        ],
+        "controlState": "open",
+        "componentScopeSelector": "[data-specfirst-root=\"Picker\"]",
+        "attribute": "aria-expanded",
+        "expectedCollapsedValue": "false",
+        "expectedExpandedValue": "true"
+      }
+    },
+    {
+      "id": "popup-associated",
+      "category": "structure",
+      "sourceRequirementId": "popup-associated",
+      "description": "The trigger element is programmatically associated with the candidate popup.",
+      "testable": true,
+      "maturity": "automated",
+      "testStrategy": "attribute-check",
+      "layers": {
+        "wcagOutcomes": [
+          "1.3.1"
+        ],
+        "ariaPattern": [
+          "APG-combobox-select-only"
+        ],
+        "ariaValidity": [
+          "required-attributes-on-trigger",
+          "allowed-popup-role"
+        ],
+        "automation": [
+          "attribute-check"
+        ]
+      },
+      "params": {
+        "triggerElementId": "jsx-2",
+        "popupElementId": "jsx-3",
+        "optionElementIds": [
+          "jsx-4"
+        ],
+        "controlState": "open",
+        "componentScopeSelector": "[data-specfirst-root=\"Picker\"]",
+        "attribute": "aria-controls",
+        "expectedPopupRole": "listbox"
+      }
+    },
+    {
+      "id": "popup-listbox",
+      "category": "role",
+      "sourceRequirementId": "popup-listbox",
+      "description": "The popup element exposes role=listbox.",
+      "testable": true,
+      "maturity": "automated",
+      "testStrategy": "role-query",
+      "layers": {
+        "wcagOutcomes": [
+          "1.3.1",
+          "4.1.2"
+        ],
+        "ariaPattern": [
+          "APG-combobox-select-only"
+        ],
+        "ariaValidity": [
+          "allowed-popup-role"
+        ],
+        "automation": [
+          "role-query"
+        ]
+      },
+      "params": {
+        "triggerElementId": "jsx-2",
+        "popupElementId": "jsx-3",
+        "optionElementIds": [
+          "jsx-4"
+        ],
+        "controlState": "open",
+        "componentScopeSelector": "[data-specfirst-root=\"Picker\"]",
+        "expectedRole": "listbox"
+      }
+    },
+    {
+      "id": "option-roles",
+      "category": "role",
+      "sourceRequirementId": "option-roles",
+      "description": "Mapped candidate option elements expose option semantics.",
+      "testable": true,
+      "maturity": "automated",
+      "testStrategy": "role-query",
+      "layers": {
+        "wcagOutcomes": [
+          "1.3.1",
+          "4.1.2"
+        ],
+        "ariaPattern": [
+          "APG-combobox-select-only"
+        ],
+        "ariaValidity": [
+          "option-state-constraints"
+        ],
+        "automation": [
+          "role-query"
+        ]
+      },
+      "params": {
+        "triggerElementId": "jsx-2",
+        "popupElementId": "jsx-3",
+        "optionElementIds": [
+          "jsx-4"
+        ],
+        "controlState": "open",
+        "componentScopeSelector": "[data-specfirst-root=\"Picker\"]",
+        "expectedRole": "option"
+      }
+    },
+    {
+      "id": "selected-state",
+      "category": "state",
+      "sourceRequirementId": "selected-state",
+      "description": "The selected option exposes aria-selected=true; all other options expose aria-selected=false.",
+      "testable": true,
+      "maturity": "automated",
+      "testStrategy": "attribute-check",
+      "layers": {
+        "wcagOutcomes": [
+          "4.1.2"
+        ],
+        "ariaPattern": [
+          "APG-combobox-select-only"
+        ],
+        "ariaValidity": [
+          "option-state-constraints"
+        ],
+        "automation": [
+          "attribute-check"
+        ]
+      },
+      "params": {
+        "triggerElementId": "jsx-2",
+        "popupElementId": "jsx-3",
+        "optionElementIds": [
+          "jsx-4"
+        ],
+        "controlState": "open",
+        "componentScopeSelector": "[data-specfirst-root=\"Picker\"]",
+        "attribute": "aria-selected",
+        "expectedValues": [
+          "true",
+          "false"
+        ]
+      }
+    },
+    {
+      "id": "keyboard-arrow-down-opens",
+      "category": "keyboard",
+      "sourceRequirementId": "keyboard-arrow-down-opens",
+      "description": "ArrowDown on the trigger opens the popup and sets the first option as the active option while DOM focus remains on the combobox.",
+      "testable": true,
+      "maturity": "automated",
+      "testStrategy": "keyboard-open",
+      "layers": {
+        "wcagOutcomes": [
+          "2.1.1"
+        ],
+        "ariaPattern": [
+          "APG-combobox-select-only"
+        ],
+        "automation": [
+          "keyboard-open"
+        ]
+      },
+      "params": {
+        "triggerElementId": "jsx-2",
+        "popupElementId": "jsx-3",
+        "optionElementIds": [
+          "jsx-4"
+        ],
+        "controlState": "open",
+        "componentScopeSelector": "[data-specfirst-root=\"Picker\"]",
+        "key": "ArrowDown",
+        "expectedPopupRole": "listbox",
+        "expectedActiveOption": "first-option",
+        "focusManagementStrategy": {
+          "type": "aria-activedescendant",
+          "domFocusRemainsOn": "trigger",
+          "activeOptionReferencedBy": "aria-activedescendant"
+        }
+      }
+    },
+    {
+      "id": "keyboard-enter-selects",
+      "category": "keyboard",
+      "sourceRequirementId": "keyboard-enter-selects",
+      "description": "Enter accepts the active option, closes the popup, and keeps DOM focus on or returns DOM focus to the trigger.",
+      "testable": true,
+      "maturity": "automated",
+      "testStrategy": "keyboard-select",
+      "layers": {
+        "wcagOutcomes": [
+          "2.1.1"
+        ],
+        "ariaPattern": [
+          "APG-combobox-select-only"
+        ],
+        "automation": [
+          "keyboard-select"
+        ]
+      },
+      "params": {
+        "triggerElementId": "jsx-2",
+        "popupElementId": "jsx-3",
+        "optionElementIds": [
+          "jsx-4"
+        ],
+        "controlState": "open",
+        "componentScopeSelector": "[data-specfirst-root=\"Picker\"]",
+        "key": "Enter",
+        "expectedAction": "select-active-option",
+        "focusManagementStrategy": {
+          "type": "aria-activedescendant",
+          "domFocusRemainsOn": "trigger",
+          "activeOptionReferencedBy": "aria-activedescendant"
+        }
+      }
+    },
+    {
+      "id": "keyboard-escape-closes",
+      "category": "keyboard",
+      "sourceRequirementId": "keyboard-escape-closes",
+      "description": "Escape closes the popup without changing the current selection and returns focus to the trigger.",
+      "testable": true,
+      "maturity": "automated",
+      "testStrategy": "keyboard-close",
+      "layers": {
+        "wcagOutcomes": [
+          "2.1.1",
+          "2.1.2"
+        ],
+        "ariaPattern": [
+          "APG-combobox-select-only"
+        ],
+        "automation": [
+          "keyboard-close"
+        ]
+      },
+      "params": {
+        "triggerElementId": "jsx-2",
+        "popupElementId": "jsx-3",
+        "optionElementIds": [
+          "jsx-4"
+        ],
+        "controlState": "open",
+        "componentScopeSelector": "[data-specfirst-root=\"Picker\"]",
+        "key": "Escape",
+        "expectedExpandedValue": "false"
+      }
+    },
+    {
+      "id": "axe-scan",
+      "category": "axe",
+      "sourceRequirementId": "axe-scan",
+      "description": "WCAG-tagged axe-core scan scoped to the component root returns zero violations in both collapsed and expanded states.",
+      "testable": true,
+      "maturity": "automated",
+      "testStrategy": "axe-scan",
+      "layers": {
+        "wcagOutcomes": [
+          "1.3.1",
+          "4.1.2"
+        ],
+        "automation": [
+          "axe-scan"
+        ]
+      },
+      "params": {
+        "triggerElementId": "jsx-2",
+        "popupElementId": "jsx-3",
+        "optionElementIds": [
+          "jsx-4"
+        ],
+        "controlState": "open",
+        "componentScopeSelector": "[data-specfirst-root=\"Picker\"]",
+        "scopeSelector": "[data-specfirst-root=\"Picker\"]",
+        "axeIntegration": "@axe-core/playwright",
+        "axeTags": [
+          "wcag2a",
+          "wcag2aa",
+          "wcag21a",
+          "wcag21aa",
+          "wcag22a",
+          "wcag22aa"
+        ],
+        "axeRules": [
+          "aria-allowed-role",
+          "aria-required-attr",
+          "aria-valid-attr-value",
+          "color-contrast"
+        ]
+      }
+    }
+  ],
+  "validation": {
+    "requiredMvpChecksPresent": true
+  },
+  "focusManagementStrategy": {
+    "type": "aria-activedescendant",
+    "domFocusRemainsOn": "trigger",
+    "activeOptionReferencedBy": "aria-activedescendant"
+  },
+  "manualReviewRequired": [
+    {
+      "id": "screen-reader-announcement-quality",
+      "source": "manifest",
+      "reason": "Automated tests confirm ARIA attributes are present; they cannot verify that NVDA, JAWS, or VoiceOver actually announce the combobox, options, and state changes in a usable way. Requires manual testing with at least one screen reader."
+    },
+    {
+      "id": "visual-focus-quality",
+      "source": "manifest",
+      "reason": "Automated tests confirm focus moves to the correct element; they cannot verify that the visible focus indicator meets WCAG 2.4.11 or is perceptible to low-vision users. Requires manual visual inspection."
+    },
+    {
+      "id": "native-select-preference",
+      "source": "manifest",
+      "reason": "Automated tests cannot determine whether a native <select> element would better serve users in this product context. A human must evaluate whether the custom component is justified."
+    },
+    {
+      "id": "cross-browser-at-behavior",
+      "source": "manifest",
+      "reason": "Playwright tests run in a single browser/AT pairing. Cross-browser screen reader behavior (e.g. Chrome+NVDA vs Safari+VoiceOver) must be verified manually."
+    },
+    {
+      "id": "option-label-meaningfulness",
+      "source": "manifest",
+      "reason": "Automated tests confirm option text is non-empty; they cannot verify that option labels are meaningful, unambiguous, or appropriate in the product context."
+    },
+    {
+      "id": "cognitive-load",
+      "source": "manifest",
+      "reason": "The number of options, grouping strategy, and interaction model may impose cognitive load. This requires human judgment and cannot be automated."
+    }
+  ],
+  "bobPatchConstraints": [
+    "May only add or correct ARIA attributes defined in ariaValidity",
+    "May only add keyboard event handlers defined in ariaPattern.keyboardModel",
+    "Must not restructure the DOM or change element types",
+    "Must not introduce ARIA roles not listed in ariaValidity",
+    "Must flag invalid host elements for human review instead of patching silently",
+    "Must not create a custom combobox where a native <select> would suffice"
+  ],
+  "accessibilityClaimBoundary": {
+    "allowedClaims": [
+      "Automated checks passed for the requirements defined in this manifest",
+      "Manual review is required before making accessibility claims",
+      "This manifest covers the select-only combobox pattern only"
+    ],
+    "forbiddenClaims": [
+      "WCAG 2.2 AA compliant",
+      "fully accessible",
+      "accessibility guaranteed",
+      "meets all WCAG requirements",
+      "screen reader compatible",
+      "Component is accessible",
+      "Component passed WCAG"
+    ],
+    "manualReviewRequired": true
+  },
+  "phaseStateBoundary": {
+    "phase": 4,
+    "forbiddenAtThisPhase": [
+      "Code was patched",
+      "Tests were generated",
+      "Component behavior was verified"
+    ]
+  },
+  "integrity": {
+    "hashAlgorithm": "sha256",
+    "hashFieldPolicy": "integrity.hash set to null before hashing",
+    "canonicalization": "recursive-key-sort",
+    "hashIncludesCreatedAt": true,
+    "hash": "sha256:d302afc0330173d02d65a7e1cb08752d2c045052706777366636aca3b95dbcc9"
+  },
+  "nextPhase": {
+    "canContinue": true,
+    "testGenerationInput": "lockedSpec.json"
+  }
+}

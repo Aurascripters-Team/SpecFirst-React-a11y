@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "generated",
+  "lockedSpecPath": "specfirst/runs/2026-05-16T20-01-11-151Z-analyze/lockedSpec.json",
+  "lockedSpecHash": "sha256:d302afc0330173d02d65a7e1cb08752d2c045052706777366636aca3b95dbcc9",
+  "testFilePath": "tests/a11y/Picker.spec.ts",
+  "testFileHash": "sha256:6ab6b39b87edb62f57f056453400393aadb1f39751dfdec3b2b0d95ccb8292b8",
+  "harnessFilePath": "src/specfirst-demo/generated/PickerHarness.tsx",
+  "harnessFileHash": "sha256:7d751e99d965044efe0ba684a4a6f56c460467ca74f6538d03bc5ed7c18ab1c1",
+  "generatedArtifactHashes": {
+    "testFile": "sha256:6ab6b39b87edb62f57f056453400393aadb1f39751dfdec3b2b0d95ccb8292b8",
+    "harnessFile": "sha256:7d751e99d965044efe0ba684a4a6f56c460467ca74f6538d03bc5ed7c18ab1c1",
+    "combined": "sha256:50bc6a3b9657c29e702bf96ec4e9a525e9697940ce5bdb6936162217e08bbcec"
+  },
+  "demoRoute": "/specfirst/generated/Picker",
+  "generatedCheckIds": [
+    "accessible-name",
+    "combobox-role",
+    "expanded-state",
+    "popup-associated",
+    "popup-listbox",
+    "option-roles",
+    "selected-state",
+    "keyboard-arrow-down-opens",
+    "keyboard-enter-selects",
+    "keyboard-escape-closes",
+    "axe-scan"
+  ],
+  "testCount": 11,
+  "generationPolicy": {
+    "mode": "deterministic",
+    "bobUsed": false,
+    "testsGenerated": true,
+    "testsRun": false,
+    "componentModified": false,
+    "lockedSpecModified": false,
+    "uiRendered": false,
+    "complianceClaimMade": false
+  },
+  "nextPhase": {
+    "canContinue": true,
+    "baselineTestCommand": "npx playwright test tests/a11y/Picker.spec.ts",
+    "demoRoute": "/specfirst/generated/Picker"
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "schemaVersion": "1.0.0",
+  "component": {
+    "name": "Picker",
+    "path": "tests/fixtures/ArrowComponentWithAria.tsx"
+  },
+  "classification": {
+    "pattern": "react-select-only-combobox",
+    "status": "supported",
+    "confidence": 0.97,
+    "confidenceLevel": "high",
+    "decisionReason": "Classified as react-select-only-combobox because the component has a controlled value, options collection, selection callback, trigger-controlled popup, mapped selectable options, and no text input."
+  },
+  "scoreBreakdown": {
+    "score": 31,
+    "maxScore": 31,
+    "normalized": 0.97
+  },
+  "candidateScores": [
+    {
+      "pattern": "react-select-only-combobox",
+      "score": 31,
+      "maxScore": 31,
+      "normalized": 1,
+      "blocked": false
+    }
+  ],
+  "evidence": [
+    {
+      "id": "has-options-collection",
+      "category": "data-model",
+      "weight": 3,
+      "message": "Component has an options collection prop."
+    },
+    {
+      "id": "has-value-prop",
+      "category": "data-model",
+      "weight": 2,
+      "message": "Component has a selected value prop."
+    },
+    {
+      "id": "has-selection-callback-with-options",
+      "category": "data-model",
+      "weight": 2,
+      "message": "Component has a selection-style callback in combination with an options collection."
+    },
+    {
+      "id": "has-open-close-state",
+      "category": "interaction",
+      "weight": 3,
+      "message": "Component has open/close state for popup visibility."
+    },
+    {
+      "id": "has-candidate-trigger",
+      "category": "interaction",
+      "weight": 3,
+      "message": "Component analysis identified a candidate trigger element.",
+      "elementIds": [
+        "jsx-2"
+      ]
+    },
+    {
+      "id": "has-candidate-popup",
+      "category": "interaction",
+      "weight": 3,
+      "message": "Component analysis identified a candidate popup element.",
+      "elementIds": [
+        "jsx-3"
+      ]
+    },
+    {
+      "id": "has-candidate-options",
+      "category": "interaction",
+      "weight": 3,
+      "message": "Component analysis identified candidate option elements.",
+      "elementIds": [
+        "jsx-4"
+      ]
+    },
+    {
+      "id": "trigger-controls-popup",
+      "category": "interaction",
+      "weight": 2,
+      "message": "Trigger appears to control the popup through component state."
+    },
+    {
+      "id": "has-conditional-popup",
+      "category": "render-pattern",
+      "weight": 2,
+      "message": "Component conditionally renders a popup-like element."
+    },
+    {
+      "id": "options-rendered-from-map",
+      "category": "render-pattern",
+      "weight": 2,
+      "message": "Component renders options from a mapped collection."
+    },
+    {
+      "id": "has-selectable-value-options",
+      "category": "render-pattern",
+      "weight": 2,
+      "message": "Candidate options call a selection callback with a value.",
+      "elementIds": [
+        "jsx-4"
+      ]
+    },
+    {
+      "id": "no-text-input",
+      "category": "discriminator",
+      "weight": 2,
+      "message": "No input or textarea detected, supporting select-only classification."
+    },
+    {
+      "id": "no-native-select",
+      "category": "discriminator",
+      "weight": 2,
+      "message": "No native select element detected."
+    }
+  ],
+  "blockers": [],
+  "rejectedPatterns": [
+    {
+      "pattern": "react-editable-combobox",
+      "reason": "No input element or freeform text entry was detected."
+    },
+    {
+      "pattern": "react-menu-button",
+      "reason": "Items select values through a selection callback rather than trigger arbitrary actions."
+    },
+    {
+      "pattern": "react-navigation-menu",
+      "reason": "No links, hrefs, or routing targets were detected inside the candidate option subtree."
+    },
+    {
+      "pattern": "native-select",
+      "reason": "No native select element was detected, although native select may be preferable."
+    }
+  ],
+  "manualReviewNotes": [
+    "Component resembles a simple single-select control. A native <select> may be preferable if custom styling or behavior is not required.",
+    "Existing ARIA signals were detected. Classification uses structure only and does not claim the current ARIA implementation is correct."
+  ],
+  "nextPhase": {
+    "canContinue": true,
+    "manifestId": "react-select-only-combobox"
+  }
+}
