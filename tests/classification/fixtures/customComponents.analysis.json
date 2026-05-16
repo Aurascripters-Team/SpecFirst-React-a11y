@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.1.0",
+  "component": { "name": "DesignSystemPicker", "path": "fixtures/DesignSystemPicker.tsx", "framework": "react", "language": "typescript", "declarationKind": "function", "exportType": "named" },
+  "props": [
+    { "name": "options", "kind": "collection" },
+    { "name": "value", "kind": "value" },
+    { "name": "onChange", "kind": "callback" }
+  ],
+  "state": [{ "name": "open", "setter": "setOpen", "likelyPurpose": "open-close" }],
+  "jsxElements": [
+    { "id": "jsx-1", "tag": "Button", "isNativeElement": false, "childrenIds": [], "attributes": ["onClick"], "eventHandlers": ["onClick"], "ariaAttributes": [] },
+    { "id": "jsx-2", "tag": "ListItem", "isNativeElement": false, "childrenIds": [], "attributes": ["onClick"], "eventHandlers": ["onClick"], "ariaAttributes": [], "insideMap": true }
+  ],
+  "interactionModel": { "candidateTriggerElementId": "jsx-1", "candidateOptionElementIds": ["jsx-2"], "controlState": "open" },
+  "renderPatterns": { "conditionalPopup": false, "optionsRenderedFromMap": true, "triggerControlsPopup": true, "selectableOptions": true },
+  "accessibilitySignals": { "roles": [], "ariaAttributes": [], "accessibleNameCandidates": [], "hasAccessibleNameCandidate": true, "hasKeyboardHandler": false, "hasComboboxRole": false, "hasListboxRole": false, "hasOptionRole": false, "hasAriaExpanded": false, "hasAriaControls": false, "hasAriaSelected": false, "hasAriaActiveDescendant": false },
+  "nativeElementSignals": { "hasNativeSelect": false, "couldUseNativeSelect": false },
+  "eventStateLinks": [{ "elementId": "jsx-2", "event": "onClick", "effects": [{ "type": "callback-call", "callback": "onChange", "argument": "option.value", "likelyAction": "select-value" }] }],
+  "riskFlags": [],
+  "limitations": ["Imported custom components are not resolved in the MVP."]
+}

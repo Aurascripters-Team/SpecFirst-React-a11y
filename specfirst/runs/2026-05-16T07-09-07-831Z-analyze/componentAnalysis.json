@@ -1,0 +1,559 @@
+{
+  "schemaVersion": "1.1.0",
+  "component": {
+    "name": "EdgeCasePicker",
+    "path": "tests/fixtures/EdgeCasePicker.tsx",
+    "framework": "react",
+    "language": "typescript",
+    "declarationKind": "function",
+    "exportType": "named"
+  },
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "required": true,
+      "kind": "label"
+    },
+    {
+      "name": "options",
+      "type": "ActionItem[]",
+      "required": true,
+      "kind": "collection"
+    },
+    {
+      "name": "value",
+      "type": "string | undefined",
+      "required": false,
+      "kind": "value"
+    },
+    {
+      "name": "onChange",
+      "type": "(value: string) => void",
+      "required": true,
+      "kind": "callback"
+    },
+    {
+      "name": "onDelete",
+      "type": "((value: string) => void) | undefined",
+      "required": false,
+      "kind": "callback"
+    },
+    {
+      "name": "className",
+      "type": "string | undefined",
+      "required": false,
+      "kind": "styling"
+    }
+  ],
+  "state": [
+    {
+      "name": "open",
+      "setter": "setOpen",
+      "initialValue": "false",
+      "likelyPurpose": "open-close"
+    },
+    {
+      "name": "query",
+      "setter": "setQuery",
+      "initialValue": "\"\"",
+      "likelyPurpose": "unknown"
+    },
+    {
+      "name": "selectedValues",
+      "setter": "setSelectedValues",
+      "initialValue": "value ? [value] : []",
+      "likelyPurpose": "selection"
+    }
+  ],
+  "jsxElements": [
+    {
+      "id": "jsx-1",
+      "tag": "div",
+      "isNativeElement": true,
+      "childrenIds": [
+        "jsx-2",
+        "jsx-3",
+        "jsx-4"
+      ],
+      "sourceLocation": {
+        "startLine": 39,
+        "endLine": 101
+      },
+      "snippet": "<div className={className}>",
+      "attributes": [
+        "className"
+      ],
+      "eventHandlers": [],
+      "ariaAttributes": [],
+      "insideMap": false,
+      "insideConditional": false,
+      "textHints": [],
+      "classNameHints": [],
+      "literalHints": []
+    },
+    {
+      "id": "jsx-2",
+      "tag": "span",
+      "isNativeElement": true,
+      "parentId": "jsx-1",
+      "childrenIds": [],
+      "sourceLocation": {
+        "startLine": 40,
+        "endLine": 40
+      },
+      "snippet": "<span>",
+      "attributes": [],
+      "eventHandlers": [],
+      "ariaAttributes": [],
+      "insideMap": false,
+      "insideConditional": false,
+      "textHints": [],
+      "classNameHints": [],
+      "literalHints": []
+    },
+    {
+      "id": "jsx-3",
+      "tag": "button",
+      "isNativeElement": true,
+      "parentId": "jsx-1",
+      "childrenIds": [],
+      "sourceLocation": {
+        "startLine": 42,
+        "endLine": 50
+      },
+      "snippet": "<button aria-haspopup=\"listbox\" aria-expanded={open} onClick={() => setOpen(!open)} >",
+      "attributes": [
+        "aria-haspopup",
+        "aria-expanded",
+        "onClick"
+      ],
+      "eventHandlers": [
+        "onClick"
+      ],
+      "ariaAttributes": [
+        "aria-haspopup",
+        "aria-expanded"
+      ],
+      "insideMap": false,
+      "insideConditional": false,
+      "textHints": [
+        "Choose actions"
+      ],
+      "classNameHints": [],
+      "literalHints": [
+        {
+          "value": "Choose actions",
+          "source": "fallback-text"
+        },
+        {
+          "value": "listbox",
+          "source": "attribute"
+        }
+      ]
+    },
+    {
+      "id": "jsx-4",
+      "tag": "div",
+      "isNativeElement": true,
+      "parentId": "jsx-1",
+      "childrenIds": [
+        "jsx-5",
+        "jsx-6"
+      ],
+      "sourceLocation": {
+        "startLine": 53,
+        "endLine": 99
+      },
+      "snippet": "<div className=\"picker-popup\">",
+      "attributes": [
+        "className"
+      ],
+      "eventHandlers": [],
+      "ariaAttributes": [],
+      "insideMap": false,
+      "insideConditional": true,
+      "textHints": [],
+      "classNameHints": [
+        "picker-popup"
+      ],
+      "literalHints": [
+        {
+          "value": "picker-popup",
+          "source": "className"
+        }
+      ]
+    },
+    {
+      "id": "jsx-5",
+      "tag": "input",
+      "isNativeElement": true,
+      "parentId": "jsx-4",
+      "childrenIds": [],
+      "sourceLocation": {
+        "startLine": 54,
+        "endLine": 59
+      },
+      "snippet": "<input aria-label={`Search ${label}`} value={query} onChange={(event) => setQuery(event.target.value)} placeholder=\"Search options\" />",
+      "attributes": [
+        "aria-label",
+        "value",
+        "onChange",
+        "placeholder"
+      ],
+      "eventHandlers": [
+        "onChange"
+      ],
+      "ariaAttributes": [
+        "aria-label"
+      ],
+      "insideMap": false,
+      "insideConditional": true,
+      "textHints": [],
+      "classNameHints": [],
+      "literalHints": [
+        {
+          "value": "Search options",
+          "source": "attribute"
+        }
+      ]
+    },
+    {
+      "id": "jsx-6",
+      "tag": "ul",
+      "isNativeElement": true,
+      "parentId": "jsx-4",
+      "childrenIds": [
+        "jsx-7"
+      ],
+      "sourceLocation": {
+        "startLine": 61,
+        "endLine": 98
+      },
+      "snippet": "<ul className=\"picker-list\">",
+      "attributes": [
+        "className"
+      ],
+      "eventHandlers": [],
+      "ariaAttributes": [],
+      "insideMap": false,
+      "insideConditional": true,
+      "textHints": [],
+      "classNameHints": [
+        "picker-list"
+      ],
+      "literalHints": [
+        {
+          "value": "picker-list",
+          "source": "className"
+        }
+      ]
+    },
+    {
+      "id": "jsx-7",
+      "tag": "li",
+      "isNativeElement": true,
+      "parentId": "jsx-6",
+      "childrenIds": [
+        "jsx-8",
+        "jsx-9",
+        "jsx-11"
+      ],
+      "sourceLocation": {
+        "startLine": 63,
+        "endLine": 96
+      },
+      "snippet": "<li key={option.value} className=\"picker-option\">",
+      "attributes": [
+        "key",
+        "className"
+      ],
+      "eventHandlers": [],
+      "ariaAttributes": [],
+      "insideMap": true,
+      "insideConditional": true,
+      "textHints": [],
+      "classNameHints": [
+        "picker-option"
+      ],
+      "literalHints": [
+        {
+          "value": "picker-option",
+          "source": "className"
+        }
+      ]
+    },
+    {
+      "id": "jsx-8",
+      "tag": "a",
+      "isNativeElement": true,
+      "parentId": "jsx-7",
+      "childrenIds": [],
+      "sourceLocation": {
+        "startLine": 65,
+        "endLine": 65
+      },
+      "snippet": "<a href={option.href}>",
+      "attributes": [
+        "href"
+      ],
+      "eventHandlers": [],
+      "ariaAttributes": [],
+      "insideMap": true,
+      "insideConditional": true,
+      "textHints": [],
+      "classNameHints": [],
+      "literalHints": []
+    },
+    {
+      "id": "jsx-9",
+      "tag": "label",
+      "isNativeElement": true,
+      "parentId": "jsx-7",
+      "childrenIds": [
+        "jsx-10"
+      ],
+      "sourceLocation": {
+        "startLine": 67,
+        "endLine": 85
+      },
+      "snippet": "<label>",
+      "attributes": [],
+      "eventHandlers": [],
+      "ariaAttributes": [],
+      "insideMap": true,
+      "insideConditional": true,
+      "textHints": [],
+      "classNameHints": [],
+      "literalHints": []
+    },
+    {
+      "id": "jsx-10",
+      "tag": "input",
+      "isNativeElement": true,
+      "parentId": "jsx-9",
+      "childrenIds": [],
+      "sourceLocation": {
+        "startLine": 68,
+        "endLine": 83
+      },
+      "snippet": "<input type=\"checkbox\" checked={selectedValues.includes(option.value)} disabled={option.disabled} onChange={(event) => { const checked = event.target.checked...",
+      "attributes": [
+        "type",
+        "checked",
+        "disabled",
+        "onChange"
+      ],
+      "eventHandlers": [
+        "onChange"
+      ],
+      "ariaAttributes": [],
+      "insideMap": true,
+      "insideConditional": true,
+      "textHints": [],
+      "classNameHints": [],
+      "literalHints": [
+        {
+          "value": "checkbox",
+          "source": "attribute"
+        }
+      ]
+    },
+    {
+      "id": "jsx-11",
+      "tag": "button",
+      "isNativeElement": true,
+      "parentId": "jsx-7",
+      "childrenIds": [],
+      "sourceLocation": {
+        "startLine": 89,
+        "endLine": 94
+      },
+      "snippet": "<button type=\"button\" onClick={() => onDelete(option.value)} >",
+      "attributes": [
+        "type",
+        "onClick"
+      ],
+      "eventHandlers": [
+        "onClick"
+      ],
+      "ariaAttributes": [],
+      "insideMap": true,
+      "insideConditional": true,
+      "textHints": [
+        "Delete"
+      ],
+      "classNameHints": [],
+      "literalHints": [
+        {
+          "value": "Delete",
+          "source": "text-node"
+        },
+        {
+          "value": "button",
+          "source": "attribute"
+        }
+      ]
+    }
+  ],
+  "interactionModel": {
+    "candidateTriggerElementId": "jsx-3",
+    "candidatePopupElementId": "jsx-4",
+    "candidateOptionElementIds": [
+      "jsx-10",
+      "jsx-11"
+    ],
+    "controlState": "open"
+  },
+  "renderPatterns": {
+    "conditionalPopup": true,
+    "popupControlledByState": "open",
+    "optionsRenderedFromMap": true,
+    "triggerControlsPopup": true,
+    "selectableOptions": true
+  },
+  "accessibilitySignals": {
+    "roles": [],
+    "ariaAttributes": [
+      "aria-expanded",
+      "aria-haspopup",
+      "aria-label"
+    ],
+    "accessibleNameCandidates": [
+      {
+        "source": "button-text-fallback",
+        "elementId": "jsx-3",
+        "confidence": "medium",
+        "text": "Choose actions"
+      },
+      {
+        "source": "aria-label",
+        "elementId": "jsx-5",
+        "confidence": "high",
+        "attribute": "aria-label",
+        "text": "Search options"
+      },
+      {
+        "source": "button-text-fallback",
+        "elementId": "jsx-11",
+        "confidence": "medium",
+        "text": "Delete"
+      },
+      {
+        "source": "prop-rendered-text",
+        "prop": "label",
+        "elementId": "jsx-2",
+        "confidence": "medium"
+      }
+    ],
+    "hasAccessibleNameCandidate": true,
+    "hasKeyboardHandler": false,
+    "hasComboboxRole": false,
+    "hasListboxRole": false,
+    "hasOptionRole": false,
+    "hasAriaExpanded": true,
+    "hasAriaControls": false,
+    "hasAriaSelected": false,
+    "hasAriaActiveDescendant": false
+  },
+  "nativeElementSignals": {
+    "hasNativeSelect": false,
+    "couldUseNativeSelect": false
+  },
+  "eventStateLinks": [
+    {
+      "elementId": "jsx-3",
+      "event": "onClick",
+      "effects": [
+        {
+          "type": "state-set",
+          "callsSetter": "setOpen",
+          "state": "open",
+          "value": "!open",
+          "likelyAction": "toggle"
+        }
+      ],
+      "callsSetter": "setOpen",
+      "state": "open",
+      "likelyAction": "toggle"
+    },
+    {
+      "elementId": "jsx-5",
+      "event": "onChange",
+      "effects": [
+        {
+          "type": "state-set",
+          "callsSetter": "setQuery",
+          "state": "query",
+          "value": "event.target.value",
+          "likelyAction": "set"
+        }
+      ],
+      "callsSetter": "setQuery",
+      "state": "query",
+      "likelyAction": "set"
+    },
+    {
+      "elementId": "jsx-10",
+      "event": "onChange",
+      "effects": [
+        {
+          "type": "state-set",
+          "callsSetter": "setSelectedValues",
+          "state": "selectedValues",
+          "value": "(current) =>\n                          checked\n                            ? [...current, option.value]\n                            : current.filter((item) => item !== option.value)",
+          "likelyAction": "set"
+        },
+        {
+          "type": "callback-call",
+          "callback": "onChange",
+          "argument": "option.value",
+          "likelyAction": "select-value"
+        }
+      ],
+      "callsSetter": "setSelectedValues",
+      "state": "selectedValues",
+      "likelyAction": "select-value"
+    },
+    {
+      "elementId": "jsx-11",
+      "event": "onClick",
+      "effects": [
+        {
+          "type": "callback-call",
+          "callback": "onDelete",
+          "argument": "option.value",
+          "likelyAction": "select-value"
+        }
+      ],
+      "likelyAction": "select-value"
+    }
+  ],
+  "riskFlags": [
+    {
+      "id": "click-without-keyboard",
+      "severity": "high",
+      "message": "Click behavior exists but no keyboard handler was detected."
+    },
+    {
+      "id": "missing-popup-association",
+      "severity": "medium",
+      "message": "A trigger appears to control a popup, but no aria-controls relationship was detected."
+    },
+    {
+      "id": "missing-option-semantics",
+      "severity": "medium",
+      "message": "Mapped selectable items were detected without role=\"option\" semantics."
+    },
+    {
+      "id": "missing-selected-state",
+      "severity": "medium",
+      "message": "Selectable options were detected without aria-selected state."
+    }
+  ],
+  "limitations": [
+    "Imported custom components are not resolved in the MVP.",
+    "Screen reader behavior is not inferred from static analysis.",
+    "Accessible name candidates are detected, not fully computed."
+  ]
+}

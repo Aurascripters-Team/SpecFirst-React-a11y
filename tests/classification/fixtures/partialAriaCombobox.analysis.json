@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.1.0",
+  "component": { "name": "AriaPicker", "path": "fixtures/AriaPicker.tsx", "framework": "react", "language": "typescript", "declarationKind": "arrow-function", "exportType": "named" },
+  "props": [
+    { "name": "label", "kind": "label" },
+    { "name": "options", "kind": "collection" },
+    { "name": "value", "kind": "value" },
+    { "name": "onChange", "kind": "callback" }
+  ],
+  "state": [{ "name": "open", "setter": "setOpen", "likelyPurpose": "open-close" }],
+  "jsxElements": [
+    { "id": "jsx-1", "tag": "button", "isNativeElement": true, "childrenIds": [], "attributes": ["role", "aria-expanded", "onClick"], "eventHandlers": ["onClick"], "ariaAttributes": ["aria-expanded"], "roleValue": "combobox" },
+    { "id": "jsx-2", "tag": "ul", "isNativeElement": true, "childrenIds": ["jsx-3"], "attributes": ["role"], "eventHandlers": [], "ariaAttributes": [], "roleValue": "listbox", "insideConditional": true },
+    { "id": "jsx-3", "tag": "li", "isNativeElement": true, "parentId": "jsx-2", "childrenIds": [], "attributes": ["role", "onClick"], "eventHandlers": ["onClick"], "ariaAttributes": [], "roleValue": "option", "insideMap": true, "insideConditional": true }
+  ],
+  "interactionModel": { "candidateTriggerElementId": "jsx-1", "candidatePopupElementId": "jsx-2", "candidateOptionElementIds": ["jsx-3"], "controlState": "open" },
+  "renderPatterns": { "conditionalPopup": true, "popupControlledByState": "open", "optionsRenderedFromMap": true, "triggerControlsPopup": true, "selectableOptions": true },
+  "accessibilitySignals": { "roles": ["combobox", "listbox", "option"], "ariaAttributes": ["aria-expanded"], "accessibleNameCandidates": [], "hasAccessibleNameCandidate": true, "hasKeyboardHandler": false, "hasComboboxRole": true, "hasListboxRole": true, "hasOptionRole": true, "hasAriaExpanded": true, "hasAriaControls": false, "hasAriaSelected": false, "hasAriaActiveDescendant": false },
+  "nativeElementSignals": { "hasNativeSelect": false, "couldUseNativeSelect": true },
+  "eventStateLinks": [{ "elementId": "jsx-3", "event": "onClick", "effects": [{ "type": "callback-call", "callback": "onChange", "argument": "option.value", "likelyAction": "select-value" }] }],
+  "riskFlags": [],
+  "limitations": []
+}

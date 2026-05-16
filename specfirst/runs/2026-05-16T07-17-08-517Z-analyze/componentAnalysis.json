@@ -1,0 +1,790 @@
+{
+  "schemaVersion": "1.1.0",
+  "component": {
+    "name": "CurveballPicker",
+    "path": "tests/fixtures/CurveballPicker.tsx",
+    "framework": "react",
+    "language": "typescript",
+    "declarationKind": "function",
+    "exportType": "named"
+  },
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "required": true,
+      "kind": "label"
+    },
+    {
+      "name": "items",
+      "type": "PickerItem[]",
+      "required": true,
+      "kind": "collection"
+    },
+    {
+      "name": "value",
+      "type": "string | undefined",
+      "required": false,
+      "kind": "value"
+    },
+    {
+      "name": "selectedValues",
+      "type": "string[] | undefined",
+      "required": false,
+      "kind": "collection"
+    },
+    {
+      "name": "onChange",
+      "type": "(value: string) => void",
+      "required": true,
+      "kind": "callback"
+    },
+    {
+      "name": "onNavigate",
+      "type": "((href: string) => void) | undefined",
+      "required": false,
+      "kind": "callback"
+    },
+    {
+      "name": "onDelete",
+      "type": "((id: string) => void) | undefined",
+      "required": false,
+      "kind": "callback"
+    },
+    {
+      "name": "onCreate",
+      "type": "((label: string) => void) | undefined",
+      "required": false,
+      "kind": "callback"
+    },
+    {
+      "name": "className",
+      "type": "string | undefined",
+      "required": false,
+      "kind": "styling"
+    }
+  ],
+  "state": [
+    {
+      "name": "open",
+      "setter": "setOpen",
+      "initialValue": "false",
+      "likelyPurpose": "open-close"
+    },
+    {
+      "name": "query",
+      "setter": "setQuery",
+      "initialValue": "\"\"",
+      "likelyPurpose": "unknown"
+    },
+    {
+      "name": "activeId",
+      "setter": "setActiveId",
+      "initialValue": "null",
+      "likelyPurpose": "unknown"
+    },
+    {
+      "name": "localSelected",
+      "setter": "setLocalSelected",
+      "initialValue": "selectedValues",
+      "likelyPurpose": "selection"
+    }
+  ],
+  "jsxElements": [
+    {
+      "id": "jsx-1",
+      "tag": "section",
+      "isNativeElement": true,
+      "childrenIds": [
+        "jsx-2",
+        "jsx-3",
+        "jsx-4"
+      ],
+      "sourceLocation": {
+        "startLine": 61,
+        "endLine": 156
+      },
+      "snippet": "<section className={className}>",
+      "attributes": [
+        "className"
+      ],
+      "eventHandlers": [],
+      "ariaAttributes": [],
+      "insideMap": false,
+      "insideConditional": false,
+      "textHints": [],
+      "classNameHints": [],
+      "literalHints": []
+    },
+    {
+      "id": "jsx-2",
+      "tag": "label",
+      "isNativeElement": true,
+      "parentId": "jsx-1",
+      "childrenIds": [],
+      "sourceLocation": {
+        "startLine": 62,
+        "endLine": 62
+      },
+      "snippet": "<label id=\"curveball-label\">",
+      "attributes": [
+        "id"
+      ],
+      "eventHandlers": [],
+      "ariaAttributes": [],
+      "insideMap": false,
+      "insideConditional": false,
+      "textHints": [],
+      "classNameHints": [],
+      "literalHints": [
+        {
+          "value": "curveball-label",
+          "source": "attribute"
+        }
+      ]
+    },
+    {
+      "id": "jsx-3",
+      "tag": "button",
+      "isNativeElement": true,
+      "parentId": "jsx-1",
+      "childrenIds": [],
+      "sourceLocation": {
+        "startLine": 64,
+        "endLine": 86
+      },
+      "snippet": "<button type=\"button\" aria-labelledby=\"curveball-label\" aria-haspopup=\"listbox\" aria-expanded={open} aria-controls=\"curveball-popup\" onClick={() => setOpen((...",
+      "attributes": [
+        "type",
+        "aria-labelledby",
+        "aria-haspopup",
+        "aria-expanded",
+        "aria-controls",
+        "onClick",
+        "onKeyDown"
+      ],
+      "eventHandlers": [
+        "onClick",
+        "onKeyDown"
+      ],
+      "ariaAttributes": [
+        "aria-labelledby",
+        "aria-haspopup",
+        "aria-expanded",
+        "aria-controls"
+      ],
+      "insideMap": false,
+      "insideConditional": false,
+      "textHints": [],
+      "classNameHints": [],
+      "literalHints": [
+        {
+          "value": "button",
+          "source": "attribute"
+        },
+        {
+          "value": "curveball-label",
+          "source": "attribute"
+        },
+        {
+          "value": "listbox",
+          "source": "attribute"
+        },
+        {
+          "value": "curveball-popup",
+          "source": "attribute"
+        },
+        {
+          "value": "ArrowDown",
+          "source": "attribute"
+        },
+        {
+          "value": "Escape",
+          "source": "attribute"
+        }
+      ]
+    },
+    {
+      "id": "jsx-4",
+      "tag": "div",
+      "isNativeElement": true,
+      "parentId": "jsx-1",
+      "childrenIds": [
+        "jsx-5",
+        "jsx-6",
+        "jsx-7"
+      ],
+      "sourceLocation": {
+        "startLine": 89,
+        "endLine": 154
+      },
+      "snippet": "<div id=\"curveball-popup\" className=\"picker-popover\">",
+      "attributes": [
+        "id",
+        "className"
+      ],
+      "eventHandlers": [],
+      "ariaAttributes": [],
+      "insideMap": false,
+      "insideConditional": true,
+      "textHints": [],
+      "classNameHints": [
+        "picker-popover"
+      ],
+      "literalHints": [
+        {
+          "value": "curveball-popup",
+          "source": "attribute"
+        },
+        {
+          "value": "picker-popover",
+          "source": "className"
+        }
+      ]
+    },
+    {
+      "id": "jsx-5",
+      "tag": "input",
+      "isNativeElement": true,
+      "parentId": "jsx-4",
+      "childrenIds": [],
+      "sourceLocation": {
+        "startLine": 90,
+        "endLine": 100
+      },
+      "snippet": "<input aria-label={`Search ${label}`} value={query} placeholder=\"Search or create\" onChange={(event) => setQuery(event.target.value)} onKeyDown={(event) => {...",
+      "attributes": [
+        "aria-label",
+        "value",
+        "placeholder",
+        "onChange",
+        "onKeyDown"
+      ],
+      "eventHandlers": [
+        "onChange",
+        "onKeyDown"
+      ],
+      "ariaAttributes": [
+        "aria-label"
+      ],
+      "insideMap": false,
+      "insideConditional": true,
+      "textHints": [],
+      "classNameHints": [],
+      "literalHints": [
+        {
+          "value": "Search or create",
+          "source": "attribute"
+        },
+        {
+          "value": "Enter",
+          "source": "attribute"
+        }
+      ]
+    },
+    {
+      "id": "jsx-6",
+      "tag": "button",
+      "isNativeElement": true,
+      "parentId": "jsx-4",
+      "childrenIds": [],
+      "sourceLocation": {
+        "startLine": 103,
+        "endLine": 105
+      },
+      "snippet": "<button type=\"button\" onClick={() => onCreate?.(query.trim())}>",
+      "attributes": [
+        "type",
+        "onClick"
+      ],
+      "eventHandlers": [
+        "onClick"
+      ],
+      "ariaAttributes": [],
+      "insideMap": false,
+      "insideConditional": true,
+      "textHints": [
+        "Create “",
+        "”"
+      ],
+      "classNameHints": [],
+      "literalHints": [
+        {
+          "value": "Create “",
+          "source": "text-node"
+        },
+        {
+          "value": "”",
+          "source": "text-node"
+        },
+        {
+          "value": "button",
+          "source": "attribute"
+        }
+      ]
+    },
+    {
+      "id": "jsx-7",
+      "tag": "ul",
+      "isNativeElement": true,
+      "parentId": "jsx-4",
+      "childrenIds": [
+        "jsx-8"
+      ],
+      "sourceLocation": {
+        "startLine": 108,
+        "endLine": 153
+      },
+      "snippet": "<ul role=\"listbox\" aria-labelledby=\"curveball-label\">",
+      "attributes": [
+        "role",
+        "aria-labelledby"
+      ],
+      "eventHandlers": [],
+      "ariaAttributes": [
+        "aria-labelledby"
+      ],
+      "roleValue": "listbox",
+      "insideMap": false,
+      "insideConditional": true,
+      "textHints": [],
+      "classNameHints": [],
+      "literalHints": [
+        {
+          "value": "listbox",
+          "source": "attribute"
+        },
+        {
+          "value": "curveball-label",
+          "source": "attribute"
+        }
+      ]
+    },
+    {
+      "id": "jsx-8",
+      "tag": "li",
+      "isNativeElement": true,
+      "parentId": "jsx-7",
+      "childrenIds": [
+        "jsx-9",
+        "jsx-10",
+        "jsx-11"
+      ],
+      "sourceLocation": {
+        "startLine": 110,
+        "endLine": 151
+      },
+      "snippet": "<li key={item.id} id={`curveball-option-${item.id}`} role=\"option\" aria-selected={localSelected.includes(item.value)} data-active={activeId === item.id} onMo...",
+      "attributes": [
+        "key",
+        "id",
+        "role",
+        "aria-selected",
+        "data-active",
+        "onMouseEnter"
+      ],
+      "eventHandlers": [
+        "onMouseEnter"
+      ],
+      "ariaAttributes": [
+        "aria-selected"
+      ],
+      "roleValue": "option",
+      "insideMap": true,
+      "insideConditional": true,
+      "textHints": [
+        "action"
+      ],
+      "classNameHints": [],
+      "literalHints": [
+        {
+          "value": "action",
+          "source": "fallback-text"
+        },
+        {
+          "value": "option",
+          "source": "attribute"
+        }
+      ]
+    },
+    {
+      "id": "jsx-9",
+      "tag": "a",
+      "isNativeElement": true,
+      "parentId": "jsx-8",
+      "childrenIds": [],
+      "sourceLocation": {
+        "startLine": 119,
+        "endLine": 128
+      },
+      "snippet": "<a href={item.href} onClick={(event) => { event.preventDefault(); onNavigate?.(item.href!); setOpen(false); }} >",
+      "attributes": [
+        "href",
+        "onClick"
+      ],
+      "eventHandlers": [
+        "onClick"
+      ],
+      "ariaAttributes": [],
+      "insideMap": true,
+      "insideConditional": true,
+      "textHints": [],
+      "classNameHints": [],
+      "literalHints": []
+    },
+    {
+      "id": "jsx-10",
+      "tag": "button",
+      "isNativeElement": true,
+      "parentId": "jsx-8",
+      "childrenIds": [],
+      "sourceLocation": {
+        "startLine": 130,
+        "endLine": 139
+      },
+      "snippet": "<button type=\"button\" disabled={item.disabled} onClick={() => { onDelete?.(item.id); setOpen(false); }} >",
+      "attributes": [
+        "type",
+        "disabled",
+        "onClick"
+      ],
+      "eventHandlers": [
+        "onClick"
+      ],
+      "ariaAttributes": [],
+      "insideMap": true,
+      "insideConditional": true,
+      "textHints": [
+        "Delete",
+        "Run"
+      ],
+      "classNameHints": [],
+      "literalHints": [
+        {
+          "value": "Delete",
+          "source": "fallback-text"
+        },
+        {
+          "value": "Run",
+          "source": "fallback-text"
+        },
+        {
+          "value": "button",
+          "source": "attribute"
+        }
+      ]
+    },
+    {
+      "id": "jsx-11",
+      "tag": "label",
+      "isNativeElement": true,
+      "parentId": "jsx-8",
+      "childrenIds": [
+        "jsx-12"
+      ],
+      "sourceLocation": {
+        "startLine": 141,
+        "endLine": 149
+      },
+      "snippet": "<label>",
+      "attributes": [],
+      "eventHandlers": [],
+      "ariaAttributes": [],
+      "insideMap": true,
+      "insideConditional": true,
+      "textHints": [],
+      "classNameHints": [],
+      "literalHints": []
+    },
+    {
+      "id": "jsx-12",
+      "tag": "input",
+      "isNativeElement": true,
+      "parentId": "jsx-11",
+      "childrenIds": [],
+      "sourceLocation": {
+        "startLine": 142,
+        "endLine": 147
+      },
+      "snippet": "<input type=\"checkbox\" checked={localSelected.includes(item.value)} disabled={item.disabled} onChange={() => toggleValue(item.value)} />",
+      "attributes": [
+        "type",
+        "checked",
+        "disabled",
+        "onChange"
+      ],
+      "eventHandlers": [
+        "onChange"
+      ],
+      "ariaAttributes": [],
+      "insideMap": true,
+      "insideConditional": true,
+      "textHints": [],
+      "classNameHints": [],
+      "literalHints": [
+        {
+          "value": "checkbox",
+          "source": "attribute"
+        }
+      ]
+    }
+  ],
+  "interactionModel": {
+    "candidateTriggerElementId": "jsx-3",
+    "candidatePopupElementId": "jsx-4",
+    "candidateOptionElementIds": [
+      "jsx-8",
+      "jsx-9",
+      "jsx-10",
+      "jsx-12"
+    ],
+    "controlState": "open"
+  },
+  "renderPatterns": {
+    "conditionalPopup": true,
+    "popupControlledByState": "open",
+    "optionsRenderedFromMap": true,
+    "triggerControlsPopup": true,
+    "selectableOptions": true
+  },
+  "accessibilitySignals": {
+    "roles": [
+      "listbox",
+      "option"
+    ],
+    "ariaAttributes": [
+      "aria-controls",
+      "aria-expanded",
+      "aria-haspopup",
+      "aria-label",
+      "aria-labelledby",
+      "aria-selected"
+    ],
+    "accessibleNameCandidates": [
+      {
+        "source": "aria-labelledby",
+        "elementId": "jsx-3",
+        "confidence": "high",
+        "attribute": "aria-labelledby"
+      },
+      {
+        "source": "aria-label",
+        "elementId": "jsx-5",
+        "confidence": "high",
+        "attribute": "aria-label",
+        "text": "Search or create"
+      },
+      {
+        "source": "button-text-fallback",
+        "elementId": "jsx-6",
+        "confidence": "medium",
+        "text": "Create “"
+      },
+      {
+        "source": "button-text-fallback",
+        "elementId": "jsx-6",
+        "confidence": "medium",
+        "text": "”"
+      },
+      {
+        "source": "aria-labelledby",
+        "elementId": "jsx-7",
+        "confidence": "high",
+        "attribute": "aria-labelledby"
+      },
+      {
+        "source": "visible-text",
+        "elementId": "jsx-8",
+        "confidence": "medium",
+        "text": "action"
+      },
+      {
+        "source": "button-text-fallback",
+        "elementId": "jsx-10",
+        "confidence": "medium",
+        "text": "Delete"
+      },
+      {
+        "source": "button-text-fallback",
+        "elementId": "jsx-10",
+        "confidence": "medium",
+        "text": "Run"
+      },
+      {
+        "source": "prop-rendered-text",
+        "prop": "label",
+        "elementId": "jsx-2",
+        "confidence": "medium"
+      }
+    ],
+    "hasAccessibleNameCandidate": true,
+    "hasKeyboardHandler": true,
+    "hasComboboxRole": false,
+    "hasListboxRole": true,
+    "hasOptionRole": true,
+    "hasAriaExpanded": true,
+    "hasAriaControls": true,
+    "hasAriaSelected": true,
+    "hasAriaActiveDescendant": false
+  },
+  "nativeElementSignals": {
+    "hasNativeSelect": false,
+    "couldUseNativeSelect": false
+  },
+  "eventStateLinks": [
+    {
+      "elementId": "jsx-3",
+      "event": "onClick",
+      "effects": [
+        {
+          "type": "state-set",
+          "callsSetter": "setOpen",
+          "state": "open",
+          "value": "(current) => !current",
+          "likelyAction": "set"
+        }
+      ],
+      "callsSetter": "setOpen",
+      "state": "open",
+      "likelyAction": "set"
+    },
+    {
+      "elementId": "jsx-3",
+      "event": "onKeyDown",
+      "effects": [
+        {
+          "type": "state-set",
+          "callsSetter": "setOpen",
+          "state": "open",
+          "value": "true",
+          "likelyAction": "open-popup"
+        },
+        {
+          "type": "state-set",
+          "callsSetter": "setActiveId",
+          "state": "activeId",
+          "value": "visibleItems[0]?.id ?? null",
+          "likelyAction": "set"
+        },
+        {
+          "type": "state-set",
+          "callsSetter": "setOpen",
+          "state": "open",
+          "value": "false",
+          "likelyAction": "close-popup"
+        }
+      ],
+      "callsSetter": "setOpen",
+      "state": "open",
+      "likelyAction": "open-popup"
+    },
+    {
+      "elementId": "jsx-5",
+      "event": "onChange",
+      "effects": [
+        {
+          "type": "state-set",
+          "callsSetter": "setQuery",
+          "state": "query",
+          "value": "event.target.value",
+          "likelyAction": "set"
+        }
+      ],
+      "callsSetter": "setQuery",
+      "state": "query",
+      "likelyAction": "set"
+    },
+    {
+      "elementId": "jsx-5",
+      "event": "onKeyDown",
+      "effects": [
+        {
+          "type": "callback-call",
+          "callback": "onCreate",
+          "argument": "query.trim()",
+          "likelyAction": "select-value"
+        }
+      ],
+      "likelyAction": "select-value"
+    },
+    {
+      "elementId": "jsx-6",
+      "event": "onClick",
+      "effects": [
+        {
+          "type": "callback-call",
+          "callback": "onCreate",
+          "argument": "query.trim()",
+          "likelyAction": "select-value"
+        }
+      ],
+      "likelyAction": "select-value"
+    },
+    {
+      "elementId": "jsx-8",
+      "event": "onMouseEnter",
+      "effects": [
+        {
+          "type": "state-set",
+          "callsSetter": "setActiveId",
+          "state": "activeId",
+          "value": "item.id",
+          "likelyAction": "set"
+        }
+      ],
+      "callsSetter": "setActiveId",
+      "state": "activeId",
+      "likelyAction": "set"
+    },
+    {
+      "elementId": "jsx-9",
+      "event": "onClick",
+      "effects": [
+        {
+          "type": "callback-call",
+          "callback": "onNavigate",
+          "argument": "item.href!",
+          "likelyAction": "select-value"
+        },
+        {
+          "type": "state-set",
+          "callsSetter": "setOpen",
+          "state": "open",
+          "value": "false",
+          "likelyAction": "close-popup"
+        }
+      ],
+      "callsSetter": "setOpen",
+      "state": "open",
+      "likelyAction": "select-value"
+    },
+    {
+      "elementId": "jsx-10",
+      "event": "onClick",
+      "effects": [
+        {
+          "type": "callback-call",
+          "callback": "onDelete",
+          "argument": "item.id",
+          "likelyAction": "select-value"
+        },
+        {
+          "type": "state-set",
+          "callsSetter": "setOpen",
+          "state": "open",
+          "value": "false",
+          "likelyAction": "close-popup"
+        }
+      ],
+      "callsSetter": "setOpen",
+      "state": "open",
+      "likelyAction": "select-value"
+    }
+  ],
+  "riskFlags": [],
+  "limitations": [
+    "Imported custom components are not resolved in the MVP.",
+    "Screen reader behavior is not inferred from static analysis.",
+    "Accessible name candidates are detected, not fully computed."
+  ]
+}

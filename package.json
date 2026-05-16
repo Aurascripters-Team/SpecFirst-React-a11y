@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "specfirst:analyze": "tsx specfirst/cli/analyze.ts",
+    "specfirst:classify": "tsx specfirst/cli/classify.ts",
     "test:analysis": "tsx tests/analysis/runAnalysisFixtures.ts",
+    "test:classification": "tsx tests/classification/runClassificationFixtures.ts",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {

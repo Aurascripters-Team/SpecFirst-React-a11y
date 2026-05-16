@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.1.0",
+  "component": { "name": "ActionMenu", "path": "fixtures/ActionMenu.tsx", "framework": "react", "language": "typescript", "declarationKind": "function", "exportType": "named" },
+  "props": [
+    { "name": "options", "kind": "collection" },
+    { "name": "onDelete", "kind": "callback" }
+  ],
+  "state": [{ "name": "open", "setter": "setOpen", "likelyPurpose": "open-close" }],
+  "jsxElements": [
+    { "id": "jsx-1", "tag": "button", "isNativeElement": true, "childrenIds": [], "attributes": ["onClick"], "eventHandlers": ["onClick"], "ariaAttributes": [] },
+    { "id": "jsx-2", "tag": "ul", "isNativeElement": true, "childrenIds": ["jsx-3"], "attributes": [], "eventHandlers": [], "ariaAttributes": [], "insideConditional": true },
+    { "id": "jsx-3", "tag": "li", "isNativeElement": true, "parentId": "jsx-2", "childrenIds": [], "attributes": ["onClick"], "eventHandlers": ["onClick"], "ariaAttributes": [], "insideMap": true, "insideConditional": true }
+  ],
+  "interactionModel": { "candidateTriggerElementId": "jsx-1", "candidatePopupElementId": "jsx-2", "candidateOptionElementIds": ["jsx-3"], "controlState": "open" },
+  "renderPatterns": { "conditionalPopup": true, "popupControlledByState": "open", "optionsRenderedFromMap": true, "triggerControlsPopup": true, "selectableOptions": true },
+  "accessibilitySignals": { "roles": [], "ariaAttributes": [], "accessibleNameCandidates": [], "hasAccessibleNameCandidate": true, "hasKeyboardHandler": false, "hasComboboxRole": false, "hasListboxRole": false, "hasOptionRole": false, "hasAriaExpanded": false, "hasAriaControls": false, "hasAriaSelected": false, "hasAriaActiveDescendant": false },
+  "nativeElementSignals": { "hasNativeSelect": false, "couldUseNativeSelect": false },
+  "eventStateLinks": [{ "elementId": "jsx-3", "event": "onClick", "effects": [{ "type": "callback-call", "callback": "onDelete", "argument": "option.id", "likelyAction": "unknown" }] }],
+  "riskFlags": [],
+  "limitations": []
+}

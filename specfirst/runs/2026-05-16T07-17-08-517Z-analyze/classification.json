@@ -1,0 +1,193 @@
+{
+  "schemaVersion": "1.0.0",
+  "component": {
+    "name": "CurveballPicker",
+    "path": "tests/fixtures/CurveballPicker.tsx"
+  },
+  "classification": {
+    "pattern": "mixed-interactive-popup",
+    "status": "unsupported",
+    "confidence": 0.95,
+    "confidenceLevel": "high",
+    "decisionReason": "Classified as mixed-interactive-popup because the candidate popup contains mixed interactive content such as search input, links, checkbox-based selection, or action buttons. This is not safe to remediate as a select-only combobox."
+  },
+  "scoreBreakdown": {
+    "score": 29.45,
+    "maxScore": 31,
+    "normalized": 0.95
+  },
+  "candidateScores": [
+    {
+      "pattern": "react-select-only-combobox",
+      "score": 27,
+      "maxScore": 31,
+      "normalized": 0.87,
+      "blocked": true
+    }
+  ],
+  "evidence": [
+    {
+      "id": "has-options-collection",
+      "category": "data-model",
+      "weight": 3,
+      "message": "Component has an options collection prop."
+    },
+    {
+      "id": "has-value-prop",
+      "category": "data-model",
+      "weight": 2,
+      "message": "Component has a selected value prop."
+    },
+    {
+      "id": "has-selection-callback-with-options",
+      "category": "data-model",
+      "weight": 2,
+      "message": "Component has a selection-style callback in combination with an options collection."
+    },
+    {
+      "id": "has-open-close-state",
+      "category": "interaction",
+      "weight": 3,
+      "message": "Component has open/close state for popup visibility."
+    },
+    {
+      "id": "has-candidate-trigger",
+      "category": "interaction",
+      "weight": 3,
+      "message": "Component analysis identified a candidate trigger element.",
+      "elementIds": [
+        "jsx-3"
+      ]
+    },
+    {
+      "id": "has-candidate-popup",
+      "category": "interaction",
+      "weight": 3,
+      "message": "Component analysis identified a candidate popup element.",
+      "elementIds": [
+        "jsx-4"
+      ]
+    },
+    {
+      "id": "has-candidate-options",
+      "category": "interaction",
+      "weight": 3,
+      "message": "Component analysis identified candidate option elements.",
+      "elementIds": [
+        "jsx-8",
+        "jsx-9",
+        "jsx-10",
+        "jsx-12"
+      ]
+    },
+    {
+      "id": "trigger-controls-popup",
+      "category": "interaction",
+      "weight": 2,
+      "message": "Trigger appears to control the popup through component state."
+    },
+    {
+      "id": "has-conditional-popup",
+      "category": "render-pattern",
+      "weight": 2,
+      "message": "Component conditionally renders a popup-like element."
+    },
+    {
+      "id": "options-rendered-from-map",
+      "category": "render-pattern",
+      "weight": 2,
+      "message": "Component renders options from a mapped collection."
+    },
+    {
+      "id": "no-native-select",
+      "category": "discriminator",
+      "weight": 2,
+      "message": "No native select element detected."
+    }
+  ],
+  "blockers": [
+    {
+      "id": "text-input-in-popup",
+      "type": "pattern-mismatch",
+      "severity": "hard",
+      "reason": "Text input detected inside candidate popup, suggesting editable/searchable behavior rather than select-only behavior.",
+      "elementIds": [
+        "jsx-5"
+      ]
+    },
+    {
+      "id": "checkbox-in-option-subtree",
+      "type": "unsupported-pattern",
+      "severity": "hard",
+      "reason": "Checkbox input detected inside candidate option subtree, suggesting multi-select or composite option content.",
+      "elementIds": [
+        "jsx-12"
+      ]
+    },
+    {
+      "id": "multiple-selection-detected",
+      "type": "unsupported-pattern",
+      "severity": "hard",
+      "reason": "Multiple-selection signals were detected, which require a different manifest than select-only combobox.",
+      "elementIds": [
+        "props"
+      ]
+    },
+    {
+      "id": "navigation-inside-option-subtree",
+      "type": "pattern-mismatch",
+      "severity": "hard",
+      "reason": "Anchor or href detected inside the candidate popup/option subtree, suggesting navigation rather than value selection.",
+      "elementIds": [
+        "jsx-9"
+      ]
+    },
+    {
+      "id": "nested-interactive-option-content",
+      "type": "unsafe-remediation",
+      "severity": "hard",
+      "reason": "Interactive content was detected inside candidate option elements, making listbox/option remediation unsafe.",
+      "elementIds": [
+        "jsx-10",
+        "jsx-12"
+      ]
+    },
+    {
+      "id": "action-item-detected",
+      "type": "pattern-mismatch",
+      "severity": "hard",
+      "reason": "Action button or action callback detected inside option subtree, suggesting action-menu behavior rather than pure value selection.",
+      "elementIds": [
+        "jsx-10"
+      ]
+    }
+  ],
+  "rejectedPatterns": [
+    {
+      "pattern": "react-select-only-combobox",
+      "reason": "Blocked because the component contains signals that are unsafe for select-only combobox remediation."
+    },
+    {
+      "pattern": "react-editable-combobox",
+      "reason": "Text input exists, but the popup also contains mixed interactive content, checkboxes, links, or action buttons."
+    },
+    {
+      "pattern": "react-menu-button",
+      "reason": "Items do not provide enough value-selection evidence to safely classify as select-only; action-menu behavior remains possible."
+    },
+    {
+      "pattern": "react-navigation-menu",
+      "reason": "Navigation signals exist, but the component also contains non-navigation popup behavior, so it is not a clean navigation menu."
+    },
+    {
+      "pattern": "native-select",
+      "reason": "No native select element was detected, although native select may be preferable."
+    }
+  ],
+  "manualReviewNotes": [
+    "Existing ARIA signals were detected. Classification uses structure only and does not claim the current ARIA implementation is correct."
+  ],
+  "nextPhase": {
+    "canContinue": false
+  }
+}

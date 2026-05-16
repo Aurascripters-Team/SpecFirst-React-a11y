@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.1.0",
+  "component": {
+    "name": "SelectOnlyCombobox",
+    "path": "tests/fixtures/NamedFunctionCombobox.tsx",
+    "framework": "react",
+    "language": "typescript",
+    "declarationKind": "function",
+    "exportType": "named"
+  },
+  "props": [
+    { "name": "label", "type": "string", "required": true, "kind": "label" },
+    { "name": "options", "type": "Option[]", "required": true, "kind": "collection" },
+    { "name": "value", "type": "string | undefined", "required": false, "kind": "value" },
+    { "name": "onChange", "type": "(value: string) => void", "required": true, "kind": "callback" }
+  ],
+  "state": [
+    { "name": "open", "setter": "setOpen", "initialValue": "false", "likelyPurpose": "open-close" }
+  ],
+  "jsxElements": [
+    { "id": "jsx-1", "tag": "div", "isNativeElement": true, "childrenIds": ["jsx-2", "jsx-3"], "attributes": [], "eventHandlers": [], "ariaAttributes": [] },
+    { "id": "jsx-2", "tag": "button", "isNativeElement": true, "parentId": "jsx-1", "childrenIds": [], "attributes": ["onClick"], "eventHandlers": ["onClick"], "ariaAttributes": [] },
+    { "id": "jsx-3", "tag": "ul", "isNativeElement": true, "parentId": "jsx-1", "childrenIds": ["jsx-4"], "attributes": [], "eventHandlers": [], "ariaAttributes": [], "insideConditional": true },
+    { "id": "jsx-4", "tag": "li", "isNativeElement": true, "parentId": "jsx-3", "childrenIds": [], "attributes": ["onClick"], "eventHandlers": ["onClick"], "ariaAttributes": [], "insideMap": true, "insideConditional": true }
+  ],
+  "interactionModel": {
+    "candidateTriggerElementId": "jsx-2",
+    "candidatePopupElementId": "jsx-3",
+    "candidateOptionElementIds": ["jsx-4"],
+    "controlState": "open"
+  },
+  "renderPatterns": {
+    "conditionalPopup": true,
+    "popupControlledByState": "open",
+    "optionsRenderedFromMap": true,
+    "triggerControlsPopup": true,
+    "selectableOptions": true
+  },
+  "accessibilitySignals": {
+    "roles": [],
+    "ariaAttributes": [],
+    "accessibleNameCandidates": [],
+    "hasAccessibleNameCandidate": true,
+    "hasKeyboardHandler": false,
+    "hasComboboxRole": false,
+    "hasListboxRole": false,
+    "hasOptionRole": false,
+    "hasAriaExpanded": false,
+    "hasAriaControls": false,
+    "hasAriaSelected": false,
+    "hasAriaActiveDescendant": false
+  },
+  "nativeElementSignals": {
+    "hasNativeSelect": false,
+    "couldUseNativeSelect": true
+  },
+  "eventStateLinks": [
+    {
+      "elementId": "jsx-2",
+      "event": "onClick",
+      "effects": [{ "type": "state-set", "callsSetter": "setOpen", "state": "open", "value": "!open", "likelyAction": "toggle" }]
+    },
+    {
+      "elementId": "jsx-4",
+      "event": "onClick",
+      "effects": [
+        { "type": "callback-call", "callback": "onChange", "argument": "option.value", "likelyAction": "select-value" },
+        { "type": "state-set", "callsSetter": "setOpen", "state": "open", "value": "false", "likelyAction": "close-popup" }
+      ]
+    }
+  ],
+  "riskFlags": [],
+  "limitations": []
+}
