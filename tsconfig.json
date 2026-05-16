@@ -3,12 +3,14 @@
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
+    "jsx": "react-jsx",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "types": ["node"]
+    "types": ["node", "vite/client"]
   },
-  "include": ["specfirst/**/*.ts", "tests/**/*.ts", "src/**/*.tsx"]
+  "include": ["specfirst/**/*.ts", "tests/**/*.ts", "src/**/*.ts", "src/**/*.tsx", "vite.config.ts", "playwright.config.ts"]
 }

@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "generated",
+  "lockedSpecPath": "specfirst/runs/2026-05-16T11-59-02-720Z-analyze/lockedSpec.json",
+  "lockedSpecHash": "sha256:6ce37a04c8200fedb9c65f4afb6e7b82d95b1cfa392b188b38d3fd2ba8476c03",
+  "testFilePath": "tests/a11y/SelectOnlyCombobox.spec.ts",
+  "testFileHash": "sha256:a5f4f5dbcee39c97f58f259db62201d1815dc32f593b649612f2b5a2a9a14989",
+  "harnessFilePath": "src/specfirst-demo/generated/SelectOnlyComboboxHarness.tsx",
+  "harnessFileHash": "sha256:0f30f248f57e0870eb0dda297e7c7626ed8e63f3f8fc046fcfeffc970f89aa8a",
+  "generatedArtifactHashes": {
+    "testFile": "sha256:a5f4f5dbcee39c97f58f259db62201d1815dc32f593b649612f2b5a2a9a14989",
+    "harnessFile": "sha256:0f30f248f57e0870eb0dda297e7c7626ed8e63f3f8fc046fcfeffc970f89aa8a",
+    "combined": "sha256:93842ed431d09d36bdbbaaf8649bcce94278c2fd5d40fc6e2da386d54c537cbc"
+  },
+  "demoRoute": "/specfirst/generated/SelectOnlyCombobox",
+  "generatedCheckIds": [
+    "accessible-name",
+    "combobox-role",
+    "expanded-state",
+    "popup-associated",
+    "popup-listbox",
+    "option-roles",
+    "selected-state",
+    "keyboard-arrow-down-opens",
+    "keyboard-enter-selects",
+    "keyboard-escape-closes",
+    "axe-scan"
+  ],
+  "testCount": 11,
+  "generationPolicy": {
+    "mode": "deterministic",
+    "bobUsed": false,
+    "testsGenerated": true,
+    "testsRun": false,
+    "componentModified": false,
+    "lockedSpecModified": false,
+    "uiRendered": false,
+    "complianceClaimMade": false
+  },
+  "nextPhase": {
+    "canContinue": true,
+    "baselineTestCommand": "npx playwright test tests/a11y/SelectOnlyCombobox.spec.ts",
+    "demoRoute": "/specfirst/generated/SelectOnlyCombobox"
+  }
+}

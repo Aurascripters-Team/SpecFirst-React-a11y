@@ -1,0 +1,171 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "loaded",
+  "component": {
+    "name": "SelectOnlyCombobox",
+    "path": "tests/fixtures/NamedFunctionCombobox.tsx"
+  },
+  "classification": {
+    "pattern": "react-select-only-combobox",
+    "status": "supported",
+    "confidence": 0.97,
+    "confidenceLevel": "high",
+    "decisionReason": "Classified as react-select-only-combobox because the component has a controlled value, options collection, selection callback, trigger-controlled popup, mapped selectable options, and no text input."
+  },
+  "manifest": {
+    "id": "react-select-only-combobox",
+    "version": "1.0.0",
+    "path": "specfirst/rules/react-select-only-combobox.v1.json",
+    "status": "loaded",
+    "sourceModel": "7-layer"
+  },
+  "sourceLayers": [
+    "wcagOutcomes",
+    "ariaPattern",
+    "ariaValidity",
+    "accessibleName",
+    "automation",
+    "manualReview",
+    "specfirstPolicy"
+  ],
+  "validation": {
+    "registryEntryFound": true,
+    "manifestFileFound": true,
+    "schemaValid": true,
+    "patternMatchesClassification": true,
+    "applicabilityValidated": true,
+    "hasManualReviewBoundary": true,
+    "hasReportBoundary": true
+  },
+  "sourceLayerValidation": {
+    "valid": true,
+    "requiredLayers": [
+      "wcagOutcomes",
+      "ariaPattern",
+      "ariaValidity",
+      "accessibleName",
+      "automation",
+      "manualReview",
+      "specfirstPolicy"
+    ],
+    "presentLayers": [
+      "wcagOutcomes",
+      "ariaPattern",
+      "ariaValidity",
+      "accessibleName",
+      "automation",
+      "manualReview",
+      "specfirstPolicy"
+    ],
+    "missingLayers": [],
+    "layers": {
+      "wcagOutcomes": true,
+      "ariaPattern": true,
+      "ariaValidity": true,
+      "accessibleName": true,
+      "automation": true,
+      "manualReview": true,
+      "specfirstPolicy": true
+    }
+  },
+  "manifestSummary": {
+    "requirementIds": [
+      "accessible-name",
+      "combobox-role",
+      "expanded-state",
+      "popup-associated",
+      "popup-listbox",
+      "option-roles",
+      "selected-state",
+      "keyboard-arrow-down-opens",
+      "keyboard-enter-selects",
+      "keyboard-escape-closes",
+      "axe-scan"
+    ],
+    "requirementCount": 11,
+    "automatedRequirementIds": [
+      "accessible-name",
+      "combobox-role",
+      "expanded-state",
+      "popup-associated",
+      "popup-listbox",
+      "option-roles",
+      "selected-state",
+      "keyboard-arrow-down-opens",
+      "keyboard-enter-selects",
+      "keyboard-escape-closes",
+      "axe-scan"
+    ],
+    "automatedRequirementCount": 11,
+    "manualReviewIds": [
+      "screen-reader-announcement-quality",
+      "visual-focus-quality",
+      "native-select-preference",
+      "cross-browser-at-behavior",
+      "option-label-meaningfulness",
+      "cognitive-load"
+    ],
+    "manualReviewCount": 6,
+    "bobPatchConstraints": [
+      "May only add or correct ARIA attributes defined in ariaValidity",
+      "May only add keyboard event handlers defined in ariaPattern.keyboardModel",
+      "Must not restructure the DOM or change element types",
+      "Must not introduce ARIA roles not listed in ariaValidity",
+      "Must flag invalid host elements for human review instead of patching silently",
+      "Must not create a custom combobox where a native <select> would suffice"
+    ],
+    "bobPatchConstraintCount": 6,
+    "specFirstPolicies": [
+      "native-first",
+      "bob-patch-constraints",
+      "no-aria-on-wrong-element",
+      "reject-if-mixed-interactive-popup",
+      "reject-if-multiple-selection"
+    ],
+    "specFirstPolicyCount": 5
+  },
+  "applicability": {
+    "status": "phase2-gate-passed",
+    "requires": [
+      "single selected value at a time",
+      "discrete option collection where each option maps to a selectable value",
+      "trigger-controlled popup (popup opens only on trigger interaction)",
+      "mapped selectable options (each option maps to a discrete value)",
+      "no freeform text input inside the popup"
+    ],
+    "rejectIf": [
+      "text input present inside popup",
+      "checkbox present inside option subtree",
+      "link present inside option subtree",
+      "action button present inside option subtree",
+      "multiple-selection state (aria-multiselectable=true)",
+      "nested interactive controls inside options",
+      "navigation behavior inside option subtree"
+    ],
+    "rejectIfTriggered": []
+  },
+  "reportBoundary": {
+    "allowedClaims": [
+      "Automated checks passed for the requirements defined in this manifest",
+      "Manual review is required before making accessibility claims",
+      "This manifest covers the select-only combobox pattern only"
+    ],
+    "forbiddenClaims": [
+      "WCAG 2.2 AA compliant",
+      "fully accessible",
+      "accessibility guaranteed",
+      "meets all WCAG requirements",
+      "screen reader compatible",
+      "Component is accessible",
+      "Component passed WCAG",
+      "Code was patched",
+      "Tests were generated",
+      "Component behavior was verified"
+    ],
+    "manualReviewRequired": true
+  },
+  "nextPhase": {
+    "canContinue": true,
+    "loadedManifestPath": "specfirst/rules/react-select-only-combobox.v1.json"
+  }
+}
