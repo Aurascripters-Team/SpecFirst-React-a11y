@@ -7,15 +7,24 @@
   "classification": {
     "pattern": "react-select-only-combobox",
     "status": "supported",
-    "confidence": 1,
+    "confidence": 0.97,
     "confidenceLevel": "high",
     "decisionReason": "Classified as react-select-only-combobox because the component has a controlled value, options collection, selection callback, trigger-controlled popup, mapped selectable options, and no text input."
   },
   "scoreBreakdown": {
     "score": 31,
     "maxScore": 31,
-    "normalized": 1
+    "normalized": 0.97
   },
+  "candidateScores": [
+    {
+      "pattern": "react-select-only-combobox",
+      "score": 31,
+      "maxScore": 31,
+      "normalized": 1,
+      "blocked": false
+    }
+  ],
   "evidence": [
     {
       "id": "has-options-collection",

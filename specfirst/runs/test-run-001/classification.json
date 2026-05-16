@@ -1,9 +1,0 @@
-{
-    "component": { "name": "SelectOnlyCombobox", "path": "src/components/SelectOnlyCombobox.jsx" },
-    "status": "supported",
-    "confidence": 0.92,
-    "nextPhase": {
-        "canContinue": true,
-        "manifestId": "react-select-only-combobox"
-    }
-}
