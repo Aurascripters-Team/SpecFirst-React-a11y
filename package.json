@@ -10,6 +10,8 @@
     "specfirst:freeze-spec": "tsx specfirst/cli/freezeSpec.ts",
     "specfirst:generate-tests": "tsx specfirst/cli/generateTests.ts",
     "specfirst:baseline": "tsx specfirst/cli/runBaseline.ts",
+    "specfirst:bob-prompt": "tsx specfirst/cli/generateBobPrompt.ts",
+    "specfirst:patch-guard": "tsx specfirst/cli/patchGuard.ts",
     "specfirst:demo": "vite --config vite.config.ts",
     "test:analysis": "tsx tests/analysis/runAnalysisFixtures.ts",
     "test:classification": "tsx tests/classification/runClassificationFixtures.ts",
