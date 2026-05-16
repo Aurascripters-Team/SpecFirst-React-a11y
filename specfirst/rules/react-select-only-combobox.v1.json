@@ -74,7 +74,7 @@
 
 "url": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/",
 
-"triggerSemantics": "Element with role=combobox. Must carry aria-haspopup=listbox, aria-expanded, and aria-controls pointing to the popup.",
+"triggerSemantics": "Element with role=combobox. Must carry aria-expanded and aria-controls pointing to the popup. aria-haspopup=listbox is recommended but optional for listbox popups because listbox is the implicit popup type.",
 
 "popupAssociation": "aria-controls on trigger references the id of the listbox element.",
 
@@ -88,17 +88,17 @@
 
 "keyboardModel": {
 
-"ArrowDown": "If closed, open popup and move focus to first option. If open, move focus to next option.",
+"ArrowDown": "If closed, open popup and set the active option / visual focus to the first option. If open, move the active option / visual focus to the next option while DOM focus remains on the combobox.",
 
-"ArrowUp": "If closed, open popup and move focus to last option. If open, move focus to previous option.",
+"ArrowUp": "If closed, open popup and set the active option / visual focus to the last option. If open, move the active option / visual focus to the previous option while DOM focus remains on the combobox.",
 
-"Enter": "Accept focused option, close popup, return focus to trigger.",
+"Enter": "Accept the active option, close popup, and keep DOM focus on the trigger.",
 
 "Escape": "Close popup without changing selection, return focus to trigger.",
 
-"Home": "Move focus to first option in open popup.",
+"Home": "Move the active option / visual focus to the first option in the open popup.",
 
-"End": "Move focus to last option in open popup.",
+"End": "Move the active option / visual focus to the last option in the open popup.",
 
 "Tab": "Close popup if open, move focus to next focusable element in page."
 
@@ -116,9 +116,9 @@
 
 "rule": "combobox-host-element",
 
-"description": "role=combobox is allowed on <button>, <div>, or <span>. Must NOT be placed on <input> for a select-only pattern.",
+"description": "For the MVP, role=combobox must be placed on a <button> for the select-only pattern. Must NOT be placed on <input> for a select-only pattern.",
 
-"allowedHostElements": ["button", "div", "span"]
+"allowedHostElements": ["button"]
 
 },
 
@@ -126,9 +126,11 @@
 
 "rule": "required-attributes-on-trigger",
 
-"description": "Trigger must carry aria-haspopup=listbox, aria-expanded (true|false), and aria-controls referencing the popup id.",
+"description": "Trigger must carry aria-expanded (true|false) and aria-controls referencing the popup id. aria-haspopup=listbox is recommended but optional for listbox popups.",
 
-"required": ["aria-haspopup", "aria-expanded", "aria-controls"]
+"required": ["aria-expanded", "aria-controls"],
+
+"recommended": ["aria-haspopup=listbox"]
 
 },
 
@@ -166,9 +168,13 @@
 
 "rule": "focus-target",
 
-"description": "Individual options must receive DOM focus during keyboard navigation. The listbox element itself must not be the sole focus target.",
+"description": "Keyboard navigation uses aria-activedescendant: DOM focus remains on the combobox while aria-activedescendant references the active option. Options receive visual focus / active state, not DOM focus.",
 
-"rovingTabindex": true
+"focusManagementStrategy": "aria-activedescendant",
+
+"domFocusRemainsOn": "combobox",
+
+"activeOptionReferencedBy": "aria-activedescendant"
 
 }
 
@@ -298,7 +304,7 @@
 
 "strategy": "keyboard-open",
 
-"description": "Focus trigger. Press ArrowDown. Assert popup visible and first option receives focus."
+"description": "Focus trigger. Press ArrowDown. Assert popup visible and first option becomes the active option while DOM focus remains on the combobox."
 
 },
 
@@ -308,7 +314,7 @@
 
 "strategy": "keyboard-select",
 
-"description": "Open popup. Navigate to a non-default option. Press Enter. Assert popup closed, trigger reflects new selection, and focus is on trigger."
+"description": "Open popup. Navigate to a non-default active option. Press Enter. Assert popup closed, trigger reflects new selection, and DOM focus remains on or returns to the trigger."
 
 },
 
@@ -328,7 +334,9 @@
 
 "strategy": "axe-scan",
 
-"description": "Run axe-core scoped to the component root in both collapsed and expanded states.",
+"description": "Run a WCAG-tagged axe-core scan scoped to the component root in both collapsed and expanded states.",
+
+"axeTags": ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22a", "wcag22aa"],
 
 "axeRules": ["aria-allowed-role", "aria-required-attr", "aria-valid-attr-value", "color-contrast"]
 
@@ -446,7 +454,7 @@
 
 "single selected value at a time",
 
-"static option collection (options do not change at runtime)",
+"discrete option collection where each option maps to a selectable value",
 
 "trigger-controlled popup (popup opens only on trigger interaction)",
 
@@ -698,7 +706,7 @@
 
 "category": "keyboard",
 
-"description": "ArrowDown on the trigger opens the popup and moves focus to the first option.",
+"description": "ArrowDown on the trigger opens the popup and sets the first option as the active option while DOM focus remains on the combobox.",
 
 "layers": {
 
@@ -726,7 +734,7 @@
 
 "category": "keyboard",
 
-"description": "Enter on a focused option accepts that option, closes the popup, and returns focus to the trigger.",
+"description": "Enter accepts the active option, closes the popup, and keeps DOM focus on or returns DOM focus to the trigger.",
 
 "layers": {
 
@@ -782,7 +790,7 @@
 
 "category": "axe",
 
-"description": "axe-core scoped to the component root returns zero violations in both collapsed and expanded states.",
+"description": "WCAG-tagged axe-core scan scoped to the component root returns zero violations in both collapsed and expanded states.",
 
 "layers": {
 
