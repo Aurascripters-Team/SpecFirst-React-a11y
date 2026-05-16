@@ -1,0 +1,14 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "description": "Allowed manifest set for SpecFirst Phase 3. Only manifests listed here with status=supported may be loaded. Files are resolved relative to specfirst/rules/."
+  },
+  "manifests": {
+    "react-select-only-combobox": {
+      "file": "react-select-only-combobox.v1.json",
+      "status": "supported",
+      "displayName": "React Select-Only Combobox",
+      "addedVersion": "1.0.0"
+    }
+  }
+}
