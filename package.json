@@ -12,6 +12,8 @@
     "specfirst:baseline": "tsx specfirst/cli/runBaseline.ts",
     "specfirst:bob-prompt": "tsx specfirst/cli/generateBobPrompt.ts",
     "specfirst:patch-guard": "tsx specfirst/cli/patchGuard.ts",
+    "specfirst:verify-final": "tsx specfirst/cli/verifyFinal.ts",
+    "specfirst:report": "tsx specfirst/cli/generateEvidenceReport.ts",
     "specfirst:demo": "vite --config vite.config.ts",
     "test:analysis": "tsx tests/analysis/runAnalysisFixtures.ts",
     "test:classification": "tsx tests/classification/runClassificationFixtures.ts",
