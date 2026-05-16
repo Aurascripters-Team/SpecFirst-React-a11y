@@ -9,6 +9,7 @@
     "specfirst:load-manifest": "tsx specfirst/cli/loadManifest.ts",
     "specfirst:freeze-spec": "tsx specfirst/cli/freezeSpec.ts",
     "specfirst:generate-tests": "tsx specfirst/cli/generateTests.ts",
+    "specfirst:baseline": "tsx specfirst/cli/runBaseline.ts",
     "specfirst:demo": "vite --config vite.config.ts",
     "test:analysis": "tsx tests/analysis/runAnalysisFixtures.ts",
     "test:classification": "tsx tests/classification/runClassificationFixtures.ts",
