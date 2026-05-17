@@ -147,14 +147,15 @@ export function runBaseline(options: RunBaselineOptions): BaselineResult {
   }
 
   // Step 4: Run Playwright with JSON reporter
+  const npxCmd = process.platform === "win32" ? "npx.cmd" : "npx";
   const playwrightResult = spawnSync(
-    "npx",
+    npxCmd,
     ["playwright", "test", testFilePath, "--reporter=json"],
     {
       cwd: projectRoot,
       encoding: "utf8",
       timeout: playwrightTimeout,
-      shell: true,
+      shell: false,
     },
   );
 

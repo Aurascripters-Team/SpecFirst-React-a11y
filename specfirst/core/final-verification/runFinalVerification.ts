@@ -129,14 +129,15 @@ export function runFinalVerification(options: RunFinalVerificationOptions): Fina
   }
 
   // Run final Playwright test
+  const npxCmd = process.platform === "win32" ? "npx.cmd" : "npx";
   const playwrightResult = spawnSync(
-    "npx",
+    npxCmd,
     ["playwright", "test", tgen.testFilePath, "--reporter=json"],
     {
       cwd: projectRoot,
       encoding: "utf8",
       timeout: playwrightTimeout,
-      shell: true,
+      shell: false,
     },
   );
 
