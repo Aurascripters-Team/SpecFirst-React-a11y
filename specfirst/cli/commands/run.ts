@@ -75,7 +75,7 @@ export async function runAction(
 
     info("");
     info(`${chalk.bold("Run ID:")} ${runId}`);
-    warn("Phases 6–7 not yet wired (awaiting parallel PR). Run `specfirst baseline` and `specfirst bob-prompt` manually.");
+    info(`  Next: npm run specfirst:baseline -- ${runId}`);
 
     return {
       phase: "run",
