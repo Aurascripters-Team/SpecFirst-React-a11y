@@ -1,0 +1,65 @@
+ Commits in Order:                                                                                                                                      
+  │                                                                                                                                                      
+  │  1. af91d92 - feat: add picker.ts — CommandDef interface, picker state, ANSI rendering API                                                           
+    │                                                                                                                                                    
+  │  2. 370c209 - feat: replace COMMAND_NAMES with COMMANDS registry; update completer and dispatch for slash-prefix                                     
+    │                                                                                                                                                    
+  │  3. 0400e46 - feat: wire slash command picker — keypress interception, picker callbacks, Enter handling                                              
+    │                                                                                                                                                    
+  │  4. 0fa2873 - feat: UI improvements — remove divider, add box prompt, simplify command to 'npm run specfirst'                                        
+    │                                                                                                                                                    
+  │  5. 5b39634 - feat: add build configuration and global command support                                                                               
+    │                                                                                                                                                    
+  │  6. 1d99624 - fix: improve UI — remove divider, add full-width box border, fix backspace behavior                                                    
+    │                                                                                                                                                    
+  │  7. f1fc8fb - fix: disable tab completion, preserve arrow key navigation, add bottom border on exit                                                  
+    │                                                                                                                                                    
+  │                                                                                                                                                      
+    │                                                                                                                                                    
+  │ What Was Built:                                                                                                                                      
+    │                                                                                                                                                    
+  │                                                                                                                                                      
+    │                                                                                                                                                    
+  │ Core Implementation:                                                                                                                                 
+    │                                                                                                                                                    
+  │  - Created picker.ts module with CommandDef interface, picker state management, and ANSI rendering                                                   
+    │                                                                                                                                                    
+  │  - Updated shell.ts with COMMANDS registry replacing flat string array                                                                               
+    │                                                                                                                                                    
+  │  - Implemented keypress interception for slash command activation                                                                                    
+    │                                                                                                                                                    
+  │  - Added picker navigation (↑/↓), selection (Enter), and dismissal (Escape)                                                                          
+    │                                                                                                                                                    
+  │                                                                                                                                                      
+    │                                                                                                                                                    
+  │ UI Enhancements:                                                                                                                                     
+    │                                                                                                                                                    
+  │  - Full-width box border (┏━━━┓ top, ┃ sides, ┗━━━┛ bottom)                                                                                          
+    │                                                                                                                                                    
+  │  - Magenta color scheme for borders and selected items                                                                                               
+    │                                                                                                                                                    
+  │  - Removed divider lines for cleaner interface                                                                                                       
+    │                                                                                                                                                    
+  │  - Fixed backspace behavior to keep picker active appropriately                                                                                      
+    │                                                                                                                                                    
+  │                                                                                                                                                      
+    │                                                                                                                                                    
+  │ Developer Experience:                                                                                                                                
+    │                                                                                                                                                    
+  │  - Global command: just type specfirst in terminal                                                                                                   
+    │                                                                                                                                                    
+  │  - Build configuration with tsconfig.build.json                                                                                                      
+    │                                                                                                                                                    
+  │  - npm scripts: npm run build and npm run specfirst                                                                                                  
+    │                                                                                                                                                    
+  │  - Tab now inserts spaces (disabled tab completion)                                                                                                  
+    │                                                                                                                                                    
+  │  - Arrow keys work normally when picker is inactive                                                                                                  
+    │                                                                                                                                                    
+  │                                                                                                                                                      
+    │                                                                                                                                                    
+  │ Files Modified:                                                                                                                                      
+    │                                                                                                                                                    
+  │  - Created: specfirst/cli/shared/picker.ts, tsconfig.build.json                                                                                      
+    │                                                                                                                                                    
+  │  - Modified: specfirst/cli/shell.ts, specfirst/cli/index.ts, package.json
