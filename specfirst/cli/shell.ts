@@ -113,7 +113,7 @@ async function dispatch(line: string): Promise<import("./shared/ui.js").RunStats
     }
     case "verify": {
       if (!args[0]) { info("Usage: verify <run-id>"); return null; }
-      return verifyAction(args[0], { debug: false });
+      return verifyAction(args[0], { debug: false, fromShell: true });
     }
     case "report": {
       if (!args[0]) { info("Usage: report <run-id>"); return null; }

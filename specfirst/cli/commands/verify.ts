@@ -1,28 +1,60 @@
 import { Command } from "commander";
+import chalk from "chalk";
 import { getRunContext, assertRunExists } from "../shared/runContext.js";
-import { step } from "../shared/logger.js";
+import { step, info, printChecks } from "../shared/logger.js";
 import { handleCommandError } from "../shared/errorHandling.js";
 import { printResult } from "../shared/ui.js";
 import type { RunStats } from "../shared/ui.js";
-
-// import { runPatchGuard } from "../../core/patch-guard/runPatchGuard.js";
-// import { runVerification } from "../../core/verification/runVerification.js";
+import { runFinalVerification } from "../../core/final-verification/runFinalVerification.js";
 
 export async function verifyAction(
   runId: string,
-  options: { debug: boolean }
+  options: { debug: boolean; fromShell?: boolean }
 ): Promise<RunStats | null> {
   const ctx = getRunContext(runId);
   try {
     assertRunExists(ctx);
 
-    const s1 = step("Patch guard");
-    s1.warn("Patch guard not yet implemented — awaiting PR merge");
+    const s = step("Final verification");
+    const result = runFinalVerification({ input: runId, projectRoot: process.cwd() });
 
-    const s2 = step("Final verification");
-    s2.warn("Verification not yet implemented — awaiting PR merge");
+    if (result.status === "passed") {
+      s.succeed(chalk.green("✓") + ` All checks passed`);
+      info("");
+      info(options.fromShell
+        ? `  Next: report ${runId}`
+        : `  Next: npm run specfirst:report -- ${runId}`);
+      return {
+        phase: "verify",
+        runId,
+        totalChecks: result.finalTestSummary.total,
+        failedChecks: result.finalTestSummary.failed,
+        frozen: true,
+        bobPromptReady: false,
+      };
+    } else if (result.status === "failed") {
+      s.warn(`Some checks still failing after Bob patch`);
+      printChecks(result.stillFailingChecks ?? []);
+      info("");
+      info(options.fromShell
+        ? `  Next: report ${runId}`
+        : `  Next: npm run specfirst:report -- ${runId}`);
+      return {
+        phase: "verify",
+        runId,
+        totalChecks: result.finalTestSummary.total,
+        failedChecks: result.finalTestSummary.failed,
+        frozen: true,
+        bobPromptReady: false,
+      };
+    } else if (result.status === "skipped") {
+      s.warn(`Skipped: ${result.reason}`);
+    } else if (result.status === "invalidated") {
+      s.fail(chalk.red("✗") + ` Chain of custody broken — artifacts were modified`);
+    } else if (result.status === "infra-failed") {
+      s.fail(chalk.red("✗") + ` Infrastructure failure: ${(result as { reason?: string }).reason ?? "unknown"}`);
+    }
 
-    // TODO: return RunStats once runPatchGuard + runVerification are wired
     return null;
 
   } catch (err) {
@@ -33,7 +65,7 @@ export async function verifyAction(
 
 export function verifyCommand(): Command {
   return new Command("verify")
-    .description("Run patch-guard then final verification (Phase 8)")
+    .description("Run final verification (Phase 8)")
     .argument("<run-id>", "Run ID from a previous specfirst run")
     .option("--debug", "Write stack traces to debug.log on failure")
     .action(async (runId: string, options: { debug: boolean }) => {

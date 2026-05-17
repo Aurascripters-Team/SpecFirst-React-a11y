@@ -1,11 +1,14 @@
 import { Command } from "commander";
+import chalk from "chalk";
+import fs from "node:fs";
+import path from "node:path";
 import { getRunContext, assertRunExists } from "../shared/runContext.js";
-import { step } from "../shared/logger.js";
+import { step, info, warn } from "../shared/logger.js";
 import { handleCommandError } from "../shared/errorHandling.js";
 import { printResult } from "../shared/ui.js";
 import type { RunStats } from "../shared/ui.js";
-
-// import { generateReport } from "../../core/report/generateReport.js";
+import { generateEvidenceReport } from "../../core/final-verification/generateEvidenceReport.js";
+import type { FinalVerificationResult } from "../../core/final-verification/types.js";
 
 export async function reportAction(
   runId: string,
@@ -16,9 +19,29 @@ export async function reportAction(
     assertRunExists(ctx);
 
     const s = step("Generate evidence report");
-    s.warn("Report generation not yet implemented — awaiting PR merge");
 
-    // TODO: return RunStats once generateReport is wired
+    if (!fs.existsSync(ctx.finalVerificationResultPath)) {
+      s.fail(chalk.red("✗") + ` finalVerificationResult.json not found — run 'verify ${runId}' first`);
+      return null;
+    }
+
+    const result = JSON.parse(
+      fs.readFileSync(ctx.finalVerificationResultPath, "utf8")
+    ) as FinalVerificationResult;
+
+    const reportContent = generateEvidenceReport(result);
+    fs.writeFileSync(ctx.evidenceReportPath, reportContent);
+
+    s.succeed(chalk.green("✓") + ` Evidence report generated`);
+    info(`  ${path.relative(process.cwd(), ctx.evidenceReportPath)}`);
+    info("");
+    info("  Passed SpecFirst automated accessibility contract.");
+    info("  Manual review required.");
+
+    if ((result as { bobSessionEvidence?: { present?: boolean } }).bobSessionEvidence?.present === false) {
+      warn("  Bob session evidence missing — upload bob_sessions/ exports before submission.");
+    }
+
     return null;
 
   } catch (err) {
