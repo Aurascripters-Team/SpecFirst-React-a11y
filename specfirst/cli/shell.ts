@@ -160,7 +160,7 @@ export function startShell(): void {
   function drawRightBorder(): void {
     const W = process.stdout.columns || 80;
     const lineLen = ((rl as any).line || "").length;
-    // W = ┃(1) + space(1) + lineLen + rightSpaces + ┃(1): rightSpaces = W - lineLen - 3
+    // terminal row = ┃(1) + space(1) [prompt] + lineLen [rl.line] + rightSpaces + ┃(1) [right border]
     const rightSpaces = Math.max(0, W - lineLen - 3);
     process.stdout.write("\x1b[s");
     process.stdout.write(" ".repeat(rightSpaces) + magenta("┃"));
@@ -187,6 +187,7 @@ export function startShell(): void {
       (rl as any).line = "/" + cmd.name + " ";
       (rl as any).cursor = cmd.name.length + 2;
       (rl as any)._refreshLine();
+      process.nextTick(() => drawRightBorder());
     }
   };
 
