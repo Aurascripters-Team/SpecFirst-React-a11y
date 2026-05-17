@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "specfirst": "tsx specfirst/cli/index.ts",
     "specfirst:analyze": "tsx specfirst/cli/analyze.ts",
     "specfirst:classify": "tsx specfirst/cli/classify.ts",
     "specfirst:load-manifest": "tsx specfirst/cli/loadManifest.ts",

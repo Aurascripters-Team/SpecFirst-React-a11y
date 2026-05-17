@@ -1,6 +1,7 @@
 import readline from "node:readline";
 import fs from "node:fs";
 import path from "node:path";
+import chalk from "chalk";
 import { printBanner, printDivider, printResult } from "./shared/ui.js";
 import { info } from "./shared/logger.js";
 import {
@@ -140,15 +141,22 @@ async function dispatch(line: string): Promise<import("./shared/ui.js").RunStats
 
 export function startShell(): void {
   printBanner(VERSION, process.cwd());
-  printDivider();
   console.log("");
 
+  const magenta = chalk.hex("#A61E5C");
+  const terminalWidth = process.stdout.columns || 80;
+  const topBorder = magenta("┏" + "━".repeat(terminalWidth - 2) + "┓");
+  const bottomBorder = magenta("┗" + "━".repeat(terminalWidth - 2) + "┛");
+  
+  console.log(topBorder);
+  const boxPrompt = magenta("┃ ");
+  
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
-    completer,
+    completer: (line: string) => [[], line], // Disable tab completion
     historySize: 100,
-    prompt: "> ",
+    prompt: boxPrompt,
     terminal: true,
   });
 
@@ -190,6 +198,7 @@ export function startShell(): void {
       return;
     }
 
+    // Only intercept keys when picker is active
     if (!isPickerActive()) return;
 
     if (key.name === "up" || key.name === "down") {
@@ -216,7 +225,10 @@ export function startShell(): void {
       process.nextTick(() => {
         if (!isPickerActive()) return;
         const newLine = (rl as any).line as string;
-        if (!newLine.startsWith("/")) {
+        if (newLine === "") {
+          // Backspace deleted everything — keep picker active with all commands
+          updatePicker("");
+        } else if (!newLine.startsWith("/")) {
           // Backspace deleted past "/" — dismiss
           dismissPicker();
         } else {
@@ -225,6 +237,14 @@ export function startShell(): void {
       });
     }
   });
+
+  // Custom prompt function that redraws the box with borders
+  const originalPrompt = rl.prompt.bind(rl);
+  rl.prompt = function(preserveCursor?: boolean) {
+    const rightBorder = magenta(" ".repeat(Math.max(0, terminalWidth - (rl as any).line.length - 4)) + "┃");
+    process.stdout.write("\r" + magenta("┃ "));
+    originalPrompt(preserveCursor);
+  };
 
   rl.prompt();
 
@@ -259,7 +279,7 @@ export function startShell(): void {
   });
 
   rl.on("close", () => {
-    console.log("");
+    console.log("\n" + bottomBorder);
     process.exit(0);
   });
 }

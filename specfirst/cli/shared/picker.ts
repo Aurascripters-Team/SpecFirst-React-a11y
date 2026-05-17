@@ -114,7 +114,6 @@ function render(): void {
     }
   }
 
-  process.stdout.write("  " + muted("─".repeat(DIVIDER_WIDTH)) + "\n");
   process.stdout.write("  " + muted(`${_filtered.length}/${_commands.length} commands`) + "\n");
   process.stdout.write("\x1b[u"); // restore cursor to prompt
 }
