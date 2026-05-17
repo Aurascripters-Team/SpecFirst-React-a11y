@@ -5,7 +5,7 @@ import { step, printChecks, info } from "../shared/logger.js";
 import { handleCommandError } from "../shared/errorHandling.js";
 import { runBaseline } from "../../core/baseline/runBaseline.js";
 
-export async function baselineAction(runId: string, options: { debug: boolean }): Promise<void> {
+export async function baselineAction(runId: string, options: { debug: boolean; fromShell?: boolean }): Promise<void> {
   const ctx = getRunContext(runId);
   try {
     assertRunExists(ctx);
@@ -17,7 +17,9 @@ export async function baselineAction(runId: string, options: { debug: boolean })
       s.succeed(chalk.green("✓") + ` Baseline red-confirmed: ${result.failedChecks.length} failed checks`);
       printChecks(result.failedChecks.map(c => c.id));
       info("");
-      info(`  Next: bob-prompt ${runId}`);
+      info(options.fromShell
+        ? `  Next: bob-prompt ${runId}`
+        : `  Next: npm run specfirst:bob-prompt -- ${runId}`);
     } else if (result.status === "green-unexpected") {
       s.warn("All tests passed before patching — check if component is already compliant.");
     } else if (result.status === "infra-failed") {

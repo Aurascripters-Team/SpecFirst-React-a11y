@@ -20,7 +20,7 @@ function createTimestamp(): string {
 
 export async function runAction(
   file: string,
-  options: { debug: boolean; interactive: boolean }
+  options: { debug: boolean; interactive: boolean; fromShell?: boolean }
 ): Promise<RunStats | null> {
   const projectRoot = process.cwd();
   const absoluteFile = path.resolve(projectRoot, file);
@@ -75,7 +75,9 @@ export async function runAction(
 
     info("");
     info(`${chalk.bold("Run ID:")} ${runId}`);
-    info(`  Next: baseline ${runId}`);
+    info(options.fromShell
+      ? `  Next: baseline ${runId}`
+      : `  Next: npm run specfirst:baseline -- ${runId}`);
 
     return {
       phase: "run",

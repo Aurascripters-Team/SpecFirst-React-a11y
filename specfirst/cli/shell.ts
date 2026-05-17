@@ -109,7 +109,7 @@ async function dispatch(line: string): Promise<import("./shared/ui.js").RunStats
   switch (cmd) {
     case "run": {
       if (!args[0]) { info("Usage: run <file>"); return null; }
-      return runAction(args[0], { debug: false, interactive: false });
+      return runAction(args[0], { debug: false, interactive: false, fromShell: true });
     }
     case "verify": {
       if (!args[0]) { info("Usage: verify <run-id>"); return null; }
@@ -121,7 +121,7 @@ async function dispatch(line: string): Promise<import("./shared/ui.js").RunStats
     }
     case "baseline": {
       if (!args[0]) { info("Usage: baseline <run-id>"); return null; }
-      await baselineAction(args[0], { debug: false });
+      await baselineAction(args[0], { debug: false, fromShell: true });
       return null;
     }
     case "bob-prompt": {
