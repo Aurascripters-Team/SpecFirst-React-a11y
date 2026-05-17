@@ -4,18 +4,32 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "specfirst": "tsx specfirst/cli/index.ts",
     "specfirst:analyze": "tsx specfirst/cli/analyze.ts",
     "specfirst:classify": "tsx specfirst/cli/classify.ts",
     "specfirst:load-manifest": "tsx specfirst/cli/loadManifest.ts",
     "specfirst:freeze-spec": "tsx specfirst/cli/freezeSpec.ts",
     "specfirst:generate-tests": "tsx specfirst/cli/generateTests.ts",
+    "specfirst:cli": "tsx specfirst/cli/index.ts",
+    "specfirst:baseline": "tsx specfirst/cli/runBaseline.ts",
+    "specfirst:bob-prompt": "tsx specfirst/cli/generateBobPrompt.ts",
+    "specfirst:patch-guard": "tsx specfirst/cli/patchGuard.ts",
+    "specfirst:verify-final": "tsx specfirst/cli/verifyFinal.ts",
+    "specfirst:report": "tsx specfirst/cli/generateEvidenceReport.ts",
     "specfirst:demo": "vite --config vite.config.ts",
     "test:analysis": "tsx tests/analysis/runAnalysisFixtures.ts",
     "test:classification": "tsx tests/classification/runClassificationFixtures.ts",
     "test:manifest": "tsx tests/manifest/runManifestLoaderFixtures.ts",
     "test:spec": "tsx tests/spec/runFreezeSpecFixtures.ts",
     "test:test-generation": "tsx tests/test-generation/runTestGenerationFixtures.ts",
+    "test:cli-shared": "tsx tests/cli/runCliSharedFixtures.ts",
+    "test:ui": "tsx tests/cli/runUiFixtures.ts",
+    "test:shell": "tsx tests/cli/runShellFixtures.ts",
     "typecheck": "tsc --noEmit"
+  },
+  "bin": {
+    "specfirst": "./dist/cli/index.js"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.11.3",
@@ -30,6 +44,9 @@
     "vite": "^8.0.13"
   },
   "dependencies": {
+    "chalk": "^5.6.2",
+    "commander": "^14.0.3",
+    "ora": "^9.4.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   }
