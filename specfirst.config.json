@@ -1,0 +1,9 @@
+{
+  "watch": "src/components",
+  "testOutput": "tests/a11y",
+  "reportOutput": "specfirst/runs",
+  "wcagLevel": "AA",
+  "wcagVersion": "2.2",
+  "maxRetries": 3,
+  "testHarnessUrl": "http://localhost:5173"
+}
