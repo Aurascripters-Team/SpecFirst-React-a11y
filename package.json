@@ -16,6 +16,7 @@
     "test:manifest": "tsx tests/manifest/runManifestLoaderFixtures.ts",
     "test:spec": "tsx tests/spec/runFreezeSpecFixtures.ts",
     "test:test-generation": "tsx tests/test-generation/runTestGenerationFixtures.ts",
+    "test:cli-shared": "tsx tests/cli/runCliSharedFixtures.ts",
     "typecheck": "tsc --noEmit"
   },
   "bin": {
