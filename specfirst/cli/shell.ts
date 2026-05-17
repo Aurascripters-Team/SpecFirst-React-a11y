@@ -18,17 +18,19 @@ import { verifyAction } from "./commands/verify.js";
 import { reportAction } from "./commands/report.js";
 import { baselineAction } from "./commands/baseline.js";
 import { bobPromptAction } from "./commands/bobPrompt.js";
+import { patchGuardAction } from "./commands/patchGuard.js";
 
 const VERSION = "0.1.0";
 
 const COMMANDS: CommandDef[] = [
-  { name: "run",        args: "<file>",    description: "Run the full pipeline for a component" },
-  { name: "verify",     args: "<run-id>",  description: "Run patch-guard + final verification" },
-  { name: "report",     args: "<run-id>",  description: "Generate evidenceReport.md" },
-  { name: "baseline",   args: "<run-id>",  description: "Re-run baseline only" },
-  { name: "bob-prompt", args: "<run-id>",  description: "Regenerate Bob prompt" },
-  { name: "help",       args: "",          description: "Show this message" },
-  { name: "exit",       args: "",          description: "Exit SpecFirst" },
+  { name: "run",         args: "<file>",              description: "Phases 1-5: analyze → generate tests" },
+  { name: "baseline",    args: "<run-id>",            description: "Phase 6: prove tests fail before Bob" },
+  { name: "bob-prompt",  args: "<run-id>",            description: "Phase 7a: generate Bob prompt" },
+  { name: "patch-guard", args: "<run-id> [session]",  description: "Phase 7b: verify Bob stayed in scope" },
+  { name: "verify",      args: "<run-id>",            description: "Phase 8: rerun tests after Bob patch" },
+  { name: "report",      args: "<run-id>",            description: "Phase 8: generate evidence report" },
+  { name: "help",        args: "",                    description: "Show this message" },
+  { name: "exit",        args: "",                    description: "Exit SpecFirst" },
 ];
 
 export function completer(line: string): [string[], string] {
@@ -127,6 +129,11 @@ async function dispatch(line: string): Promise<import("./shared/ui.js").RunStats
     case "bob-prompt": {
       if (!args[0]) { info("Usage: bob-prompt <run-id>"); return null; }
       await bobPromptAction(args[0], { debug: false });
+      return null;
+    }
+    case "patch-guard": {
+      if (!args[0]) { info("Usage: patch-guard <run-id> [session-path]"); return null; }
+      await patchGuardAction(args[0], { debug: false, fromShell: true }, args[1]);
       return null;
     }
     case "help": {
