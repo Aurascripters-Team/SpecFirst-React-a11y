@@ -118,7 +118,7 @@ export function generateTests(options: GenerateTestsOptions): TestGenerationResu
     schemaVersion: "1.0.0",
     status: "generated",
     lockedSpecPath: relativeLockedSpecPath,
-    lockedSpecHash: lockedSpec.integrity.hash,
+    lockedSpecHash: hashFile(lockedSpecPath),
     testFilePath: paths.relativeTestFile,
     testFileHash,
     harnessFilePath: paths.relativeHarnessFile,
