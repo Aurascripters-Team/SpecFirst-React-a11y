@@ -141,30 +141,23 @@ async function dispatch(line: string): Promise<import("./shared/ui.js").RunStats
 
 export function startShell(): void {
   printBanner(VERSION, process.cwd());
-  console.log("");
 
   const magenta = chalk.hex("#A61E5C");
-  const boxPrompt = magenta("┃ ");
+  const gray = chalk.hex("#8A8A8A");
+  const prompt = magenta("◈ ");
 
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
-    completer: (line: string) => [[], line], // Tab inserts a space (no completions)
+    completer: (line: string) => [[], line],
     historySize: 100,
-    prompt: boxPrompt,
+    prompt,
     terminal: true,
   });
 
-  // Draws the right-side ┃ at the terminal's right edge on the current input line.
-  // Uses cursor save/restore so readline's cursor position is unchanged.
-  function drawRightBorder(): void {
+  function printDivider(): void {
     const W = process.stdout.columns || 80;
-    const lineLen = ((rl as any).line || "").length;
-    // terminal row = ┃(1) + space(1) [prompt] + lineLen [rl.line] + rightSpaces + ┃(1) [right border]
-    const rightSpaces = Math.max(0, W - lineLen - 3);
-    process.stdout.write("\x1b[s");
-    process.stdout.write(" ".repeat(rightSpaces) + magenta("┃"));
-    process.stdout.write("\x1b[u");
+    console.log(gray("─".repeat(W)));
   }
 
   readline.emitKeypressEvents(process.stdin);
@@ -182,12 +175,12 @@ export function startShell(): void {
         info(err instanceof Error ? err.message : String(err));
       }
       console.log("");
+      printDivider();
       rl.prompt();
     } else {
       (rl as any).line = "/" + cmd.name + " ";
       (rl as any).cursor = cmd.name.length + 2;
       (rl as any)._refreshLine();
-      process.nextTick(() => drawRightBorder());
     }
   };
 
@@ -196,7 +189,6 @@ export function startShell(): void {
   process.stdin.prependListener("keypress", (char: string, key: { name: string }) => {
     const line = (rl as any).line as string;
 
-    // Activate picker when "/" is typed on an empty line
     if (char === "/" && line === "") {
       activatePicker(rl, COMMANDS, onSelect, onDismiss);
       return;
@@ -205,8 +197,6 @@ export function startShell(): void {
     if (isPickerActive()) {
       if (key.name === "up" || key.name === "down") {
         navigatePicker(key.name as "up" | "down");
-        // readline also processes up/down as history navigation;
-        // restore rl.line to the current filter on next tick to undo that
         process.nextTick(() => {
           const filter = ((rl as any).line as string).replace(/^\//, "");
           (rl as any).line = "/" + filter;
@@ -214,55 +204,20 @@ export function startShell(): void {
         });
         return;
       }
-
-      if (key.name === "escape") {
-        dismissPicker();
-        return;
-      }
-
+      if (key.name === "escape") { dismissPicker(); return; }
       if (key.name !== "return") {
-        // Printable char or backspace while picker is active:
-        // let readline process the key, then sync picker state + redraw right border
         process.nextTick(() => {
           const newLine = (rl as any).line as string;
-          if (newLine === "") {
-            updatePicker("");
-          } else if (!newLine.startsWith("/")) {
-            dismissPicker();
-          } else {
-            updatePicker(newLine.slice(1));
-          }
-          drawRightBorder();
+          if (newLine === "") updatePicker("");
+          else if (!newLine.startsWith("/")) dismissPicker();
+          else updatePicker(newLine.slice(1));
         });
       }
       return;
     }
-
-    // Picker not active: redraw right border after readline redraws the line
-    if (key.name !== "return") {
-      process.nextTick(() => {
-        drawRightBorder();
-      });
-    }
   });
 
-  const originalPrompt = rl.prompt.bind(rl);
-  rl.prompt = function(preserveCursor?: boolean) {
-    const W = process.stdout.columns || 80;
-    // Draw the full 3-row box: top border, blank input row, bottom border
-    process.stdout.write(magenta("┏" + "━".repeat(W - 2) + "┓") + "\n");
-    process.stdout.write("\n");
-    process.stdout.write(magenta("┗" + "━".repeat(W - 2) + "┛") + "\n");
-    // Move cursor up 2 rows to the blank input row, then go to column 0
-    process.stdout.write("\x1b[2A\r");
-    // Let readline write its prompt ("┃ ") on the input row
-    originalPrompt(preserveCursor);
-    // Draw the right border after readline finishes rendering
-    process.nextTick(() => {
-      drawRightBorder();
-    });
-  };
-
+  printDivider();
   rl.prompt();
 
   rl.on("line", async (line: string) => {
@@ -292,6 +247,7 @@ export function startShell(): void {
     }
 
     console.log("");
+    printDivider();
     rl.prompt();
   });
 
