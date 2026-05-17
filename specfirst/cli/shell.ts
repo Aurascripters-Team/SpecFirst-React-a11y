@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { printBanner, printDivider, printResult } from "./shared/ui.js";
 import { info } from "./shared/logger.js";
+import { CommandDef } from "./shared/picker.js";
 import { runAction } from "./commands/run.js";
 import { verifyAction } from "./commands/verify.js";
 import { reportAction } from "./commands/report.js";
@@ -11,28 +12,39 @@ import { bobPromptAction } from "./commands/bobPrompt.js";
 
 const VERSION = "0.1.0";
 
-const COMMAND_NAMES = [
-  "run",
-  "verify",
-  "report",
-  "baseline",
-  "bob-prompt",
-  "help",
-  "exit",
+const COMMANDS: CommandDef[] = [
+  { name: "run",        args: "<file>",    description: "Run the full pipeline for a component" },
+  { name: "verify",     args: "<run-id>",  description: "Run patch-guard + final verification" },
+  { name: "report",     args: "<run-id>",  description: "Generate evidenceReport.md" },
+  { name: "baseline",   args: "<run-id>",  description: "Re-run baseline only" },
+  { name: "bob-prompt", args: "<run-id>",  description: "Regenerate Bob prompt" },
+  { name: "help",       args: "",          description: "Show this message" },
+  { name: "exit",       args: "",          description: "Exit SpecFirst" },
 ];
 
 export function completer(line: string): [string[], string] {
   const parts = line.split(" ");
   const cmd = parts[0];
+  const commandNames = COMMANDS.map(c => c.name);
 
-  // No space yet — complete command name
+  // No space yet — complete command name (bare or slash-prefixed)
   if (parts.length <= 1) {
-    const hits = COMMAND_NAMES.filter(c => c.startsWith(cmd));
+    if (cmd.startsWith("/")) {
+      const filter = cmd.slice(1);
+      const hits = commandNames
+        .filter(n => n.startsWith(filter))
+        .map(n => "/" + n);
+      return [hits.length ? hits : [], line];
+    }
+    const hits = commandNames.filter(n => n.startsWith(cmd));
     return [hits.length ? hits : [], line];
   }
 
-  // "run <partial>" — complete .tsx paths one level deep
-  if (cmd === "run" && parts.length === 2) {
+  // Strip leading "/" for argument completion so "/run" and "run" both work
+  const bareCmd = cmd.replace(/^\//, "");
+
+  // "run <partial>" or "/run <partial>" — complete .tsx paths one level deep
+  if (bareCmd === "run" && parts.length === 2) {
     const partial = parts[1];
     const dir = partial.includes(path.sep) || partial.includes("/")
       ? path.dirname(partial)
@@ -43,7 +55,7 @@ export function completer(line: string): [string[], string] {
         .filter(e => e.isFile() && e.name.endsWith(".tsx"))
         .map(e => {
           const joined = path.join(dir === "." ? "" : dir, e.name).replace(/\\/g, "/").replace(/^\//, "");
-          return `run ${joined}`;
+          return `${cmd} ${joined}`;
         })
         .filter(h => h.startsWith(line.replace(/\\/g, "/")));
       return [hits, line];
@@ -52,15 +64,15 @@ export function completer(line: string): [string[], string] {
     }
   }
 
-  // "verify <partial>" — complete run IDs from specfirst/runs/
-  if (cmd === "verify" && parts.length === 2) {
+  // "verify <partial>" or "/verify <partial>" — complete run IDs from specfirst/runs/
+  if (bareCmd === "verify" && parts.length === 2) {
     const partial = parts[1];
     try {
       const runsDir = path.join(process.cwd(), "specfirst", "runs");
       const entries = fs.readdirSync(runsDir, { withFileTypes: true });
       const hits = entries
         .filter(e => e.isDirectory() && e.name.startsWith(partial))
-        .map(e => `verify ${e.name}`);
+        .map(e => `${cmd} ${e.name}`);
       return [hits, line];
     } catch {
       return [[], line];
@@ -73,19 +85,16 @@ export function completer(line: string): [string[], string] {
 function printHelp(): void {
   info("");
   info("Commands:");
-  info("  run <file>          Run the full pipeline for a component");
-  info("  verify <run-id>     Run patch-guard + final verification");
-  info("  report <run-id>     Generate evidenceReport.md");
-  info("  baseline <run-id>   Re-run baseline only");
-  info("  bob-prompt <run-id> Regenerate Bob prompt");
-  info("  help                Show this message");
-  info("  exit                Exit SpecFirst");
+  for (const c of COMMANDS) {
+    const usage = c.args ? `${c.name} ${c.args}` : c.name;
+    info(`  ${usage.padEnd(22)} ${c.description}`);
+  }
   info("");
 }
 
 async function dispatch(line: string): Promise<import("./shared/ui.js").RunStats | null> {
   const parts = line.trim().split(/\s+/);
-  const cmd = parts[0];
+  const cmd = parts[0].replace(/^\//, "");
   const args = parts.slice(1);
 
   switch (cmd) {
@@ -144,7 +153,7 @@ export function startShell(): void {
       return;
     }
 
-    if (trimmed === "exit") {
+    if (trimmed === "exit" || trimmed === "/exit") {
       rl.close();
       return;
     }
