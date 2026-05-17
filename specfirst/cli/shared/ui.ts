@@ -11,7 +11,6 @@ export interface RunStats {
 }
 
 const SEP = chalk.hex("#8A8A8A")("│");
-const DIVIDER_WIDTH = 62;
 
 const theme = {
   symbol: () => chalk.hex("#A61E5C").bold("◈"),
@@ -30,7 +29,16 @@ export function printBanner(version: string, projectPath: string): void {
 }
 
 export function printDivider(): void {
-  console.log(chalk.hex("#8A8A8A")("─".repeat(DIVIDER_WIDTH)));
+  const width = process.stdout.columns ?? 62;
+  console.log(chalk.hex("#8A8A8A")("─".repeat(width)));
+}
+
+export function printResult(stats: RunStats | null): void {
+  console.log("");
+  printDivider();
+  if (stats) {
+    printStatusBar(stats);
+  }
 }
 
 export function printStatusBar(stats: RunStats): void {
@@ -48,7 +56,7 @@ export function printStatusBar(stats: RunStats): void {
     const bobPart = stats.bobPromptReady
       ? theme.success("Bob prompt ready")
       : theme.muted("Bob prompt pending");
-    const runLabel = theme.muted(stats.runId.slice(0, 19));
+    const runLabel = theme.muted(stats.runId.slice(0, 19)); // trims to YYYY-MM-DDTHH-MM-SS
     const checksLabel = theme.muted(`${stats.totalChecks} checks`);
     console.log(
       `${sym} ${brand} ${SEP} ${runLabel} ${SEP} ${checksLabel} ${SEP} ${failPart} ${SEP} ${frozenPart} ${SEP} ${bobPart}`

@@ -1,10 +1,8 @@
 import { Command } from "commander";
-import chalk from "chalk";
-import path from "node:path";
 import { getRunContext, assertRunExists } from "../shared/runContext.js";
-import { step, info } from "../shared/logger.js";
-import { assertStatus, handleCommandError } from "../shared/errorHandling.js";
-import { printDivider, printStatusBar } from "../shared/ui.js";
+import { step } from "../shared/logger.js";
+import { handleCommandError } from "../shared/errorHandling.js";
+import { printResult } from "../shared/ui.js";
 import type { RunStats } from "../shared/ui.js";
 
 // import { generateReport } from "../../core/report/generateReport.js";
@@ -20,6 +18,7 @@ export async function reportAction(
     const s = step("Generate evidence report");
     s.warn("Report generation not yet implemented — awaiting PR merge");
 
+    // TODO: return RunStats once generateReport is wired
     return null;
 
   } catch (err) {
@@ -35,10 +34,6 @@ export function reportCommand(): Command {
     .option("--debug", "Write stack traces to debug.log on failure")
     .action(async (runId: string, options: { debug: boolean }) => {
       const stats = await reportAction(runId, options);
-      if (stats) {
-        console.log("");
-        printDivider();
-        printStatusBar(stats);
-      }
+      printResult(stats);
     });
 }

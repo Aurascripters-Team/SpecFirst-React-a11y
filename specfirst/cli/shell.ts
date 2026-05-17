@@ -1,10 +1,13 @@
 import readline from "node:readline";
 import fs from "node:fs";
 import path from "node:path";
-import { printBanner, printDivider, printStatusBar } from "./shared/ui.js";
+import { printBanner, printDivider, printResult } from "./shared/ui.js";
+import { info } from "./shared/logger.js";
 import { runAction } from "./commands/run.js";
 import { verifyAction } from "./commands/verify.js";
 import { reportAction } from "./commands/report.js";
+import { baselineAction } from "./commands/baseline.js";
+import { bobPromptAction } from "./commands/bobPrompt.js";
 
 const VERSION = "0.1.0";
 
@@ -38,8 +41,11 @@ export function completer(line: string): [string[], string] {
       const entries = fs.readdirSync(dir, { withFileTypes: true });
       const hits = entries
         .filter(e => e.isFile() && e.name.endsWith(".tsx"))
-        .map(e => `run ${path.join(dir === "." ? "" : dir, e.name).replace(/^[\\/]/, "")}`)
-        .filter(h => h.startsWith(line));
+        .map(e => {
+          const joined = path.join(dir === "." ? "" : dir, e.name).replace(/\\/g, "/").replace(/^\//, "");
+          return `run ${joined}`;
+        })
+        .filter(h => h.startsWith(line.replace(/\\/g, "/")));
       return [hits, line];
     } catch {
       return [[], line];
@@ -65,16 +71,16 @@ export function completer(line: string): [string[], string] {
 }
 
 function printHelp(): void {
-  console.log("");
-  console.log("Commands:");
-  console.log("  run <file>          Run the full pipeline for a component");
-  console.log("  verify <run-id>     Run patch-guard + final verification");
-  console.log("  report <run-id>     Generate evidenceReport.md");
-  console.log("  baseline <run-id>   Re-run baseline only");
-  console.log("  bob-prompt <run-id> Regenerate Bob prompt");
-  console.log("  help                Show this message");
-  console.log("  exit                Exit SpecFirst");
-  console.log("");
+  info("");
+  info("Commands:");
+  info("  run <file>          Run the full pipeline for a component");
+  info("  verify <run-id>     Run patch-guard + final verification");
+  info("  report <run-id>     Generate evidenceReport.md");
+  info("  baseline <run-id>   Re-run baseline only");
+  info("  bob-prompt <run-id> Regenerate Bob prompt");
+  info("  help                Show this message");
+  info("  exit                Exit SpecFirst");
+  info("");
 }
 
 async function dispatch(line: string): Promise<import("./shared/ui.js").RunStats | null> {
@@ -84,28 +90,34 @@ async function dispatch(line: string): Promise<import("./shared/ui.js").RunStats
 
   switch (cmd) {
     case "run": {
-      if (!args[0]) { console.log("Usage: run <file>"); return null; }
+      if (!args[0]) { info("Usage: run <file>"); return null; }
       return runAction(args[0], { debug: false, interactive: false });
     }
     case "verify": {
-      if (!args[0]) { console.log("Usage: verify <run-id>"); return null; }
+      if (!args[0]) { info("Usage: verify <run-id>"); return null; }
       return verifyAction(args[0], { debug: false });
     }
     case "report": {
-      if (!args[0]) { console.log("Usage: report <run-id>"); return null; }
+      if (!args[0]) { info("Usage: report <run-id>"); return null; }
       return reportAction(args[0], { debug: false });
+    }
+    case "baseline": {
+      if (!args[0]) { info("Usage: baseline <run-id>"); return null; }
+      await baselineAction(args[0], { debug: false });
+      return null;
+    }
+    case "bob-prompt": {
+      if (!args[0]) { info("Usage: bob-prompt <run-id>"); return null; }
+      await bobPromptAction(args[0], { debug: false });
+      return null;
     }
     case "help": {
       printHelp();
       return null;
     }
-    case "exit": {
-      process.exit(0);
-    }
-    default: {
-      console.log(`Unknown command: ${cmd}. Type 'help' for available commands.`);
+    default:
+      info(`Unknown command: ${cmd}. Type 'help' for available commands.`);
       return null;
-    }
   }
 }
 
@@ -132,15 +144,16 @@ export function startShell(): void {
       return;
     }
 
+    if (trimmed === "exit") {
+      rl.close();
+      return;
+    }
+
     try {
       const stats = await dispatch(trimmed);
-      console.log("");
-      printDivider();
-      if (stats) {
-        printStatusBar(stats);
-      }
+      printResult(stats);
     } catch (err) {
-      console.log(err instanceof Error ? err.message : String(err));
+      info(err instanceof Error ? err.message : String(err));
     }
 
     console.log("");

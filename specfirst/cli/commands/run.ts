@@ -11,7 +11,7 @@ import { generateTests } from "../../core/test-generation/generateTests.js";
 import { step, printChecks, printNextAction, fatal, warn, info } from "../shared/logger.js";
 import { getRunContext } from "../shared/runContext.js";
 import { assertStatus, handleCommandError } from "../shared/errorHandling.js";
-import { printDivider, printStatusBar } from "../shared/ui.js";
+import { printResult } from "../shared/ui.js";
 import type { RunStats } from "../shared/ui.js";
 
 function createTimestamp(): string {
@@ -100,10 +100,6 @@ export function runCommand(): Command {
     .option("--interactive", "Prompt for confirmation before generating Bob prompt")
     .action(async (file: string, options: { debug: boolean; interactive: boolean }) => {
       const stats = await runAction(file, options);
-      if (stats) {
-        console.log("");
-        printDivider();
-        printStatusBar(stats);
-      }
+      printResult(stats);
     });
 }

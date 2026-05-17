@@ -1,9 +1,8 @@
 import { Command } from "commander";
-import chalk from "chalk";
 import { getRunContext, assertRunExists } from "../shared/runContext.js";
-import { step, info, printNextAction } from "../shared/logger.js";
-import { assertStatus, handleCommandError } from "../shared/errorHandling.js";
-import { printDivider, printStatusBar } from "../shared/ui.js";
+import { step } from "../shared/logger.js";
+import { handleCommandError } from "../shared/errorHandling.js";
+import { printResult } from "../shared/ui.js";
 import type { RunStats } from "../shared/ui.js";
 
 // import { runPatchGuard } from "../../core/patch-guard/runPatchGuard.js";
@@ -23,6 +22,7 @@ export async function verifyAction(
     const s2 = step("Final verification");
     s2.warn("Verification not yet implemented — awaiting PR merge");
 
+    // TODO: return RunStats once runPatchGuard + runVerification are wired
     return null;
 
   } catch (err) {
@@ -38,10 +38,6 @@ export function verifyCommand(): Command {
     .option("--debug", "Write stack traces to debug.log on failure")
     .action(async (runId: string, options: { debug: boolean }) => {
       const stats = await verifyAction(runId, options);
-      if (stats) {
-        console.log("");
-        printDivider();
-        printStatusBar(stats);
-      }
+      printResult(stats);
     });
 }
