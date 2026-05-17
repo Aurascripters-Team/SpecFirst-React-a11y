@@ -49,10 +49,10 @@ export async function bobPromptAction(runId: string, options: { debug: boolean }
     info("");
     info("  Next steps:");
     info("  1. Open IBM Bob IDE in this project");
-    info(`  2. Use the prompt at: ${path.relative(process.cwd(), ctx.bobPromptPath)}`);
+    info(`  2. Paste the contents of: ${path.relative(process.cwd(), ctx.bobPromptPath)}`);
     info(`  3. Bob should patch only: ${lockedSpecRaw.value.component.path}`);
-    info("  4. Export the Bob session markdown to bob_sessions/");
-    info(`  5. Run: specfirst:patch-guard -- ${runId} bob_sessions/<session>.md`);
+    info("  4. Export the Bob session to bob_sessions/");
+    info(`  5. Come back here and type: verify ${runId}`);
 
   } catch (err) {
     handleCommandError(err, ctx, options.debug ?? false);
