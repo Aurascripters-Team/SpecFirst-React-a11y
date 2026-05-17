@@ -3,7 +3,15 @@ import fs from "node:fs";
 import path from "node:path";
 import { printBanner, printDivider, printResult } from "./shared/ui.js";
 import { info } from "./shared/logger.js";
-import { CommandDef } from "./shared/picker.js";
+import {
+  CommandDef,
+  activatePicker,
+  updatePicker,
+  navigatePicker,
+  confirmPicker,
+  dismissPicker,
+  isPickerActive,
+} from "./shared/picker.js";
 import { runAction } from "./commands/run.js";
 import { verifyAction } from "./commands/verify.js";
 import { reportAction } from "./commands/report.js";
@@ -144,10 +152,91 @@ export function startShell(): void {
     terminal: true,
   });
 
+  readline.emitKeypressEvents(process.stdin);
+
+  const onSelect = async (cmd: CommandDef): Promise<void> => {
+    if (cmd.args === "") {
+      // No-arg command: execute immediately
+      if (cmd.name === "exit") {
+        rl.close();
+        return;
+      }
+      try {
+        const stats = await dispatch(cmd.name);
+        printResult(stats);
+      } catch (err) {
+        info(err instanceof Error ? err.message : String(err));
+      }
+      console.log("");
+      rl.prompt();
+    } else {
+      // Has args: fill "> /cmdname " in the prompt and wait for the user to type the argument
+      (rl as any).line = "/" + cmd.name + " ";
+      (rl as any).cursor = cmd.name.length + 2;
+      (rl as any)._refreshLine();
+    }
+  };
+
+  const onDismiss = (): void => {
+    // Picker is cleared; the /filter text stays in rl.line — no further action needed
+  };
+
+  process.stdin.prependListener("keypress", (char: string, key: { name: string }) => {
+    const line = (rl as any).line as string;
+
+    // Activate picker when "/" is typed on an empty line
+    if (char === "/" && line === "") {
+      activatePicker(rl, COMMANDS, onSelect, onDismiss);
+      return;
+    }
+
+    if (!isPickerActive()) return;
+
+    if (key.name === "up" || key.name === "down") {
+      navigatePicker(key.name as "up" | "down");
+      // readline also processes up/down as history navigation —
+      // restore rl.line to the current filter on next tick to undo that
+      process.nextTick(() => {
+        const filter = ((rl as any).line as string).replace(/^\//, "");
+        (rl as any).line = "/" + filter;
+        (rl as any).cursor = filter.length + 1;
+      });
+      return;
+    }
+
+    if (key.name === "escape") {
+      dismissPicker();
+      return;
+    }
+
+    // For printable chars and backspace: let readline process the key first,
+    // then sync picker state with the new rl.line on next tick.
+    // Enter is excluded here — it is handled by the "line" event below.
+    if (key.name !== "return") {
+      process.nextTick(() => {
+        if (!isPickerActive()) return;
+        const newLine = (rl as any).line as string;
+        if (!newLine.startsWith("/")) {
+          // Backspace deleted past "/" — dismiss
+          dismissPicker();
+        } else {
+          updatePicker(newLine.slice(1));
+        }
+      });
+    }
+  });
+
   rl.prompt();
 
   rl.on("line", async (line: string) => {
     const trimmed = line.trim();
+
+    // Picker active: Enter confirms the current selection — skip normal dispatch
+    if (isPickerActive()) {
+      confirmPicker();
+      return;
+    }
+
     if (!trimmed) {
       rl.prompt();
       return;
