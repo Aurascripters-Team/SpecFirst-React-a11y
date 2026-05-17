@@ -150,7 +150,7 @@ if (!bobSessionPath || !fs.existsSync(path.resolve(projectRoot, bobSessionPath))
   writeJson(bobPatchResultPath, sessionMissing);
   console.warn("[Phase 7] WARNING: No Bob session export provided. Evidence incomplete.");
   console.warn("  Patch scope passed. Continuing to Phase 8 but Bob evidence is missing.");
-  console.log(`[Phase 7] Next: npm run specfirst:verify-final -- ${input}`);
+  console.log(`[Phase 7] Next: verify ${input}`);
   process.exit(0);
 }
 

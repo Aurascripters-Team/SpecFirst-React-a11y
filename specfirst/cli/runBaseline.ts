@@ -25,7 +25,7 @@ if (result.status === "red-confirmed") {
   console.log(`[Phase 6] Baseline red-confirmed. Failed checks: ${result.failedChecks.map((c) => c.id).join(", ")}`);
   console.log(`[Phase 6] Passed checks: ${result.passedChecks.join(", ")}`);
   console.log(`[Phase 6] Artifacts written to ${relRunDir}/`);
-  console.log(`[Phase 6] Next: npm run specfirst:bob-prompt -- ${input}`);
+  console.log(`[Phase 6] Next: bob-prompt ${input}`);
 } else if (result.status === "green-unexpected") {
   console.warn(`[Phase 6] WARNING: All tests passed before Bob patching. Pipeline paused.`);
   console.warn(`[Phase 6] This may mean the component already satisfies the contract.`);

@@ -30,14 +30,14 @@ if (result.status === "passed") {
     console.warn("[Phase 8] WARNING: Bob session evidence is missing. Evidence is incomplete for submission.");
   }
   console.log(`[Phase 8] Artifacts written to ${relRunDir}/`);
-  console.log(`[Phase 8] Next: npm run specfirst:report -- ${input}`);
+  console.log(`[Phase 8] Next: report ${input}`);
 } else if (result.status === "failed") {
   console.warn(`[Phase 8] Tests still failing after Bob patch.`);
   console.warn(`[Phase 8] Failing checks: ${result.stillFailingChecks.join(", ")}`);
   console.log(`[Phase 8] Resolved checks: ${result.checkComparison.resolved.join(", ") || "(none)"}`);
   console.log(`[Phase 8] Artifacts written to ${relRunDir}/`);
   console.log(`[Phase 8] Evidence report will reflect remaining failures.`);
-  console.log(`[Phase 8] Next: npm run specfirst:report -- ${input}`);
+  console.log(`[Phase 8] Next: report ${input}`);
 } else if (result.status === "invalidated") {
   console.error(`[Phase 8] INVALIDATED: ${result.message}`);
   process.exit(1);

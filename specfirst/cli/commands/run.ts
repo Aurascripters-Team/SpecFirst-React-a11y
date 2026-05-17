@@ -75,7 +75,7 @@ export async function runAction(
 
     info("");
     info(`${chalk.bold("Run ID:")} ${runId}`);
-    info(`  Next: npm run specfirst:baseline -- ${runId}`);
+    info(`  Next: baseline ${runId}`);
 
     return {
       phase: "run",

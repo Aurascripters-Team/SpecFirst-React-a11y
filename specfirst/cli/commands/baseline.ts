@@ -17,7 +17,7 @@ export async function baselineAction(runId: string, options: { debug: boolean })
       s.succeed(chalk.green("✓") + ` Baseline red-confirmed: ${result.failedChecks.length} failed checks`);
       printChecks(result.failedChecks.map(c => c.id));
       info("");
-      info(`  Next: npm run specfirst:bob-prompt -- ${runId}`);
+      info(`  Next: bob-prompt ${runId}`);
     } else if (result.status === "green-unexpected") {
       s.warn("All tests passed before patching — check if component is already compliant.");
     } else if (result.status === "infra-failed") {
