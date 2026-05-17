@@ -1,11 +1,9 @@
 import { Command } from "commander";
 import chalk from "chalk";
 import { getRunContext, assertRunExists } from "../shared/runContext.js";
-import { step, printChecks } from "../shared/logger.js";
-import { assertStatus, handleCommandError } from "../shared/errorHandling.js";
-
-// Import from the phase 6-8 PR once merged:
-// import { runBaseline } from "../../core/baseline/runBaseline.js";
+import { step, printChecks, info } from "../shared/logger.js";
+import { handleCommandError } from "../shared/errorHandling.js";
+import { runBaseline } from "../../core/baseline/runBaseline.js";
 
 export async function baselineAction(runId: string, options: { debug: boolean }): Promise<void> {
   const ctx = getRunContext(runId);
@@ -13,14 +11,22 @@ export async function baselineAction(runId: string, options: { debug: boolean })
     assertRunExists(ctx);
 
     const s = step("Baseline");
+    const result = runBaseline({ input: runId, projectRoot: process.cwd() });
 
-    // TODO: uncomment once phase 6-8 PR merges
-    // const result = runBaseline({ input: runId, projectRoot: process.cwd() });
-    // assertStatus(result, ["red-confirmed"]);
-    // s.fail(chalk.red("✗") + ` Baseline red-confirmed: ${result.failureCount} failed checks`);
-    // printChecks(result.failedCheckIds);
-
-    s.warn("Phase 6 not yet implemented — awaiting PR merge");
+    if (result.status === "red-confirmed") {
+      s.succeed(chalk.green("✓") + ` Baseline red-confirmed: ${result.failedChecks.length} failed checks`);
+      printChecks(result.failedChecks.map(c => c.id));
+      info("");
+      info(`  Next: npm run specfirst:bob-prompt -- ${runId}`);
+    } else if (result.status === "green-unexpected") {
+      s.warn("All tests passed before patching — check if component is already compliant.");
+    } else if (result.status === "infra-failed") {
+      s.fail(chalk.red("✗") + ` Infrastructure failure: ${result.reason}`);
+    } else if (result.status === "invalidated") {
+      s.fail(chalk.red("✗") + ` Artifact hashes changed since Phase 5. Chain of custody broken.`);
+    } else {
+      s.fail(chalk.red("✗") + ` Baseline ${result.status}: ${(result as { reason?: string }).reason ?? ""}`);
+    }
   } catch (err) {
     handleCommandError(err, ctx, options.debug ?? false);
   }
