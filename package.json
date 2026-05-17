@@ -9,6 +9,7 @@
     "specfirst:load-manifest": "tsx specfirst/cli/loadManifest.ts",
     "specfirst:freeze-spec": "tsx specfirst/cli/freezeSpec.ts",
     "specfirst:generate-tests": "tsx specfirst/cli/generateTests.ts",
+    "specfirst:cli": "tsx specfirst/cli/index.ts",
     "specfirst:demo": "vite --config vite.config.ts",
     "test:analysis": "tsx tests/analysis/runAnalysisFixtures.ts",
     "test:classification": "tsx tests/classification/runClassificationFixtures.ts",
@@ -16,6 +17,9 @@
     "test:spec": "tsx tests/spec/runFreezeSpecFixtures.ts",
     "test:test-generation": "tsx tests/test-generation/runTestGenerationFixtures.ts",
     "typecheck": "tsc --noEmit"
+  },
+  "bin": {
+    "specfirst": "./dist/cli/index.js"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.11.3",
@@ -30,6 +34,9 @@
     "vite": "^8.0.13"
   },
   "dependencies": {
+    "chalk": "^5.6.2",
+    "commander": "^14.0.3",
+    "ora": "^9.4.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   }
