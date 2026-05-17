@@ -8,7 +8,7 @@ import { loadManifestForClassification } from "../../core/manifest/loadManifest.
 import type { ManifestLoadSuccess } from "../../core/manifest/types.js";
 import { freezeSpec } from "../../core/spec/freezeSpec.js";
 import { generateTests } from "../../core/test-generation/generateTests.js";
-import { step, printChecks, printNextAction, fatal, warn } from "../shared/logger.js";
+import { step, printChecks, printNextAction, fatal, warn, info } from "../shared/logger.js";
 import { getRunContext } from "../shared/runContext.js";
 import { assertStatus, handleCommandError } from "../shared/errorHandling.js";
 
@@ -30,14 +30,13 @@ export function runCommand(): Command {
         fatal(`File not found: ${file}`);
       }
 
-      console.log(chalk.bold(`SpecFirst Run: ${path.basename(file)}`));
-      console.log("");
+      info(chalk.bold(`SpecFirst Run: ${path.basename(file)}`));
+      info("");
 
       // Create run folder
       const runId = `${createTimestamp()}-analyze`;
-      const runDir = path.resolve(projectRoot, "specfirst", "runs", runId);
-      fs.mkdirSync(runDir, { recursive: true });
       const ctx = getRunContext(runId, projectRoot);
+      fs.mkdirSync(ctx.runDir, { recursive: true });
 
       try {
         // Phase 1 — Analyze
@@ -111,8 +110,8 @@ export function runCommand(): Command {
         // );
 
         // Temporary: print the run ID so the developer can use other commands
-        console.log("");
-        console.log(chalk.bold("Run ID:"), runId);
+        info("");
+        info(`${chalk.bold("Run ID:")} ${runId}`);
         warn("Phases 6–7 not yet wired (awaiting parallel PR). Run `specfirst baseline` and `specfirst bob-prompt` manually.");
 
       } catch (err) {
